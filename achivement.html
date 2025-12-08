@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Achievements - Animaux sous-marins</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('./images/background.png') no-repeat center/cover;
+            background-size: cover;
+            background-position: center;
+        }
+        /* Flèche qui apparaît au bord */
+        .arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .arrow.left { left: 0; }
+        .arrow.right { right: 0; }
+
+        /* Barre de menu */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            transform: translateX(-100%); /* caché à gauche */
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+        .sidebar.right {
+            right: 0;
+            transform: translateX(100%); /* caché à droite */
+        }
+        .sidebar.open.left { transform: translateX(0); }
+        .sidebar.open.right { transform: translateX(0); }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #444;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .sidebar button:hover {
+            background: #666;
+        }
+
+
+        /* Contenu des onglets */
+        .tab-content {
+            display: none;
+            padding-top: 50px;
+            min-height: calc(100vh - 50px);
+            background: transparent;
+
+        }
+        .tab-content.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .species {
+            position: absolute;
+            cursor: pointer;
+            transition: top 5s ease, left 5s ease;
+        }
+
+        .species img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .species.locked img {
+            filter: blur(3px) brightness(1.5);
+            pointer-events: none;
+        }
+
+
+        .tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .species:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flèches -->
+    <div class="arrow left">&#9654;</div>
+    <div class="arrow right">&#9664;</div>
+
+    <!-- Sidebar gauche -->
+    <div class="sidebar left" id="sidebarLeft">
+        <h2>Menu gauche</h2>
+        <button onclick="switchTab('game')">Revenir au jeu</button>
+        <button onclick="switchTab('achievements')">Achievements</button>
+        <button onclick="goSettings()">Settings</button>
+        <button onclick="quitGame()">Quitter</button>
+    </div>
+
+    <!-- Sidebar droite -->
+    <div class="sidebar right" id="sidebarRight">
+        <h2>Menu droit</h2>
+        <button onclick="switchTab('game')">Revenir au jeu</button>
+        <button onclick="switchTab('achievements')">Achievements</button>
+        <button onclick="goSettings()">Settings</button>
+        <button onclick="quitGame()">Quitter</button>
+    </div>
+
+
+
+    <!-- Contenu Jeu -->
+    <div id="game" class="tab-content active">
+        <h1>Cliquez ici</h1>
+    </div>
+
+    <!-- Contenu Achievements -->
+    <div id="achievements" class="tab-content">
+    </div>
+
+<script>
+    // Données espèces
+    const speciesData = [
+        { name: "Blue-ringed Octapus", img: "images/blue_ringed_octapus.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Gulper Eel", img: "images/Gulper_Eel.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Jellyfish", img: "images/jellyfish.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Narwhal", img: "images/narwhale.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Seahorse", img: "images/seahorse.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "shark", img: "images/shark.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Sunfish", img: "images/sunfish.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+        { name: "Tuna", img: "images/tuna.png", intro: "Gracieuse créature des profondeurs.", unlockedAt: 5 },
+    ];
+
+    let clickCount = 0;
+
+    function createFloatingSpecies() {
+        const container = document.getElementById("achievements");
+        container.innerHTML = "";
+
+        speciesData.forEach(species => {
+            const div = document.createElement("div");
+            div.classList.add("species");
+
+            const unlocked = clickCount >= species.unlockedAt;
+            if (!unlocked) {
+                return;
+            }
+
+            const img = document.createElement("img");
+            img.src = species.img;
+            img.alt = species.name;
+            div.appendChild(img);
+
+            if (unlocked) {
+                const tooltip = document.createElement("div");
+                tooltip.classList.add("tooltip");
+                tooltip.textContent = species.intro;
+                div.appendChild(tooltip);
+
+                div.addEventListener("click", () => {
+                    alert(species.name + " : " + species.intro);
+                });
+            }
+
+            // Position initiale aléatoire
+            div.style.top = Math.random() * (window.innerHeight - 150) + "px";
+            div.style.left = Math.random() * (window.innerWidth - 150) + "px";
+
+            container.appendChild(div);
+
+        });
+    }
+
+    function floatAround(element) {
+        setInterval(() => {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            element.style.top = y + "px";
+            element.style.left = x + "px";
+        }, 3000); // toutes les 5 secondes, nouvelle position
+    }
+
+    // Exemple incrémentation clics (dans ton vrai jeu ce sera lié au gameplay)
+    document.getElementById("game").addEventListener("click", () => {
+        clickCount++;
+        createFloatingSpecies();
+    });
+
+    createFloatingSpecies();
+
+    const contents = document.querySelectorAll(".tab-content");
+
+    // Fonction pour changer de contenu
+    function switchTab(tabId) {
+        contents.forEach(c => c.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
+    }
+
+    // Flèches et sidebars
+    const arrowLeft = document.querySelector('.arrow.left');
+    const arrowRight = document.querySelector('.arrow.right');
+    const sidebarLeft = document.getElementById('sidebarLeft');
+    const sidebarRight = document.getElementById('sidebarRight');
+
+    document.addEventListener('mousemove', e => {
+        if (!sidebarLeft.classList.contains('open')) {
+            arrowLeft.style.opacity = (e.clientX < 30) ? 1 : 0;
+        }
+        if (!sidebarRight.classList.contains('open')) {
+            arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
+        }
+    });
+
+    arrowLeft.addEventListener('click', () => {
+        sidebarLeft.classList.toggle('open');
+        if (sidebarLeft.classList.contains('open')) {
+            arrowLeft.innerHTML = '&#9664;';
+            arrowLeft.style.left = "250px";
+            arrowLeft.style.opacity = 1;
+        } else {
+            arrowLeft.innerHTML = '&#9654;';
+            arrowLeft.style.left = "0";
+            arrowLeft.style.opacity = 0;
+        }
+    });
+
+    arrowRight.addEventListener('click', () => {
+        sidebarRight.classList.toggle('open');
+        if (sidebarRight.classList.contains('open')) {
+            arrowRight.innerHTML = '&#9654;';
+            arrowRight.style.right = "250px";
+            arrowRight.style.opacity = 1;
+        } else {
+            arrowRight.innerHTML = '&#9664;';
+            arrowRight.style.right = "0";
+            arrowRight.style.opacity = 0;
+        }
+    });
+
+    // Fonctions boutons
+    function goSettings() { alert("Ouvrir les paramètres !"); }
+    function quitGame() { alert("Quitter le jeu !"); }
+
+
+
+
+</script>
+</body>
+</html>
