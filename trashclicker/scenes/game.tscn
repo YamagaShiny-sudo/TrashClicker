@@ -1,9 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7k8fvf4hfu8j"]
+[gd_scene load_steps=2 format=3 uid="uid://j7w56q11xi33"]
 
 [ext_resource type="PackedScene" uid="uid://dekjqqg5vq8tj" path="res://scenes/HUD.tscn" id="1_36rmf"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node"]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("1_36rmf")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="HUD" parent="." instance=ExtResource("1_36rmf")]
