@@ -1,8 +1,94 @@
-[gd_scene load_steps=4 format=3 uid="uid://dekjqqg5vq8tj"]
+[gd_scene load_steps=12 format=3 uid="uid://id3ekfa6qp5o"]
 
-[ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_1etfg"]
-[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="1_jdy6l"]
-[ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="2_fls4u"]
+[ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
+[ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
+[ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
+[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
+[ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
+
+[sub_resource type="Animation" id="Animation_q1nc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 648)]
+}
+
+[sub_resource type="Animation" id="Animation_jvmy4"]
+resource_name = "slide_in_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-288, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_en2g2"]
+resource_name = "slide_in_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1440, 648), Vector2(1152, 648)]
+}
+
+[sub_resource type="Animation" id="Animation_e4cfk"]
+resource_name = "slide_out_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-288, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_67toa"]
+resource_name = "slide_out_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1152, 648), Vector2(1440, 648)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jvmy4"]
+_data = {
+&"RESET": SubResource("Animation_q1nc5"),
+&"slide_in_left": SubResource("Animation_jvmy4"),
+&"slide_in_right": SubResource("Animation_en2g2"),
+&"slide_out_left": SubResource("Animation_e4cfk"),
+&"slide_out_right": SubResource("Animation_67toa")
+}
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -11,100 +97,179 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1etfg")
+script = ExtResource("1_7dvtb")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4813368
+anchor_top = 0.06666667
+anchor_right = 0.52473956
+anchor_bottom = 0.14382716
+grow_horizontal = 2
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Trash" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.43489584
+anchor_top = 0.38425925
+anchor_right = 0.5651042
+anchor_bottom = 0.6157407
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TrashButton" type="TextureButton" parent="Trash"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="leftPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_top = 648.0
+offset_right = 1151.9995
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1nc5")
+
+[node name="slideAnimation" type="AnimationPlayer" parent="leftPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="disableTime" type="Timer" parent="leftPanel"]
+
+[node name="Button" type="Button" parent="leftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0070001
+anchor_top = 0.469
+anchor_right = 1.146
+anchor_bottom = 0.531
+offset_left = -0.016021729
+offset_top = 0.08798218
+offset_right = -32.048004
+offset_bottom = -32.088013
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="rightPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75000006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 287.99994
+offset_top = 648.0
+offset_right = 287.9995
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+script = ExtResource("2_jvmy4")
+
+[node name="slideAnimation" type="AnimationPlayer" parent="rightPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="disableTime" type="Timer" parent="rightPanel"]
+
+[node name="Button" type="Button" parent="rightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0070001
+anchor_top = 0.469
+anchor_right = 1.146
+anchor_bottom = 0.531
+offset_left = -0.016021729
+offset_top = 0.08798218
+offset_right = -32.048004
+offset_bottom = -32.088013
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="VScrollBar" type="VScrollBar" parent="rightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.75000006
+offset_top = 486.0
+offset_right = 198.00049
+offset_bottom = 287.99997
+rotation = -1.5707964
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="rightPanel/VScrollBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 288.0
+offset_right = -198.0
+offset_bottom = 486.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+rotation = -1.5707964
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Score"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Trash" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Trash"]
-layout_mode = 2
-texture_normal = ExtResource("1_jdy6l")
-texture_pressed = ExtResource("2_fls4u")
-ignore_texture_size = true
-stretch_mode = 6
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Power" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Power" type="PanelContainer" parent="rightPanel/VScrollBar/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Power"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="rightPanel/VScrollBar/VBoxContainer/Power"]
 layout_mode = 2
-texture_normal = ExtResource("1_jdy6l")
-texture_pressed = ExtResource("2_fls4u")
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Power"]
+[node name="PowerLabel" type="Label" parent="rightPanel/VScrollBar/VBoxContainer/Power"]
 layout_mode = 2
 text = "Power"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Building1" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Building1" type="PanelContainer" parent="rightPanel/VScrollBar/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="BuildUpgradeButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Building1"]
+[node name="BuildUpgradeButton1" type="TextureButton" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
 layout_mode = 2
-texture_normal = ExtResource("1_jdy6l")
-texture_pressed = ExtResource("2_fls4u")
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="BuildLabel1" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Building1"]
+[node name="BuildLabel1" type="Label" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
 layout_mode = 2
 text = "Building 1"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="BuildTimer1" type="Timer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Building1"]
+[node name="BuildTimer1" type="Timer" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Trash/TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
-[connection signal="timeout" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Building1/BuildTimer1" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]
+[connection signal="timeout" from="leftPanel/disableTime" to="leftPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="leftPanel/Button" to="leftPanel" method="_on_button_pressed"]
+[connection signal="timeout" from="rightPanel/disableTime" to="rightPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="rightPanel/Button" to="rightPanel" method="_on_button_pressed"]
+[connection signal="pressed" from="rightPanel/VScrollBar/VBoxContainer/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
+[connection signal="pressed" from="rightPanel/VScrollBar/VBoxContainer/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
+[connection signal="timeout" from="rightPanel/VScrollBar/VBoxContainer/Building1/BuildTimer1" to="." method="_on_build_timer_1_timeout"]
