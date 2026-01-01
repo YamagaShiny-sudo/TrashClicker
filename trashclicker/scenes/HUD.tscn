@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://id3ekfa6qp5o"]
+[gd_scene load_steps=12 format=3 uid="uid://cluf3efj1r1j2"]
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
 [ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
@@ -11,14 +11,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1152, 648)]
+"values": [Vector2(1920, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jvmy4"]
@@ -26,14 +26,14 @@ resource_name = "slide_in_left"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(-288, 0), Vector2(0, 0)]
+"values": [Vector2(-480, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_en2g2"]
@@ -41,14 +41,14 @@ resource_name = "slide_in_right"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(1440, 648), Vector2(1152, 648)]
+"values": [Vector2(1920, 0), Vector2(1440, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_e4cfk"]
@@ -56,14 +56,14 @@ resource_name = "slide_out_left"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-288, 0)]
+"values": [Vector2(0, 0), Vector2(-480, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_67toa"]
@@ -71,14 +71,14 @@ resource_name = "slide_out_right"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(1152, 648), Vector2(1440, 648)]
+"values": [Vector2(1440, 0), Vector2(1920, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jvmy4"]
@@ -99,6 +99,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7dvtb")
 
+[node name="LeftPanel" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_right = 1920.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="leftPanel" type="Panel" parent="LeftPanel"]
+layout_mode = 2
+script = ExtResource("1_q1nc5")
+
+[node name="slideAnimation" type="AnimationPlayer" parent="LeftPanel/leftPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="disableTime" type="Timer" parent="LeftPanel/leftPanel"]
+
+[node name="Button" type="Button" parent="LeftPanel/leftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0070001
+anchor_top = 0.469
+anchor_right = 1.146
+anchor_bottom = 0.531
+offset_left = -3.3600464
+offset_top = 1.4799805
+offset_right = -6.080017
+offset_bottom = -1.4800415
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -111,6 +147,530 @@ text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="RightPanel" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_right = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="rightPanel" type="Panel" parent="RightPanel"]
+layout_mode = 2
+script = ExtResource("2_jvmy4")
+
+[node name="slideAnimation" type="AnimationPlayer" parent="RightPanel/rightPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="disableTime" type="Timer" parent="RightPanel/rightPanel"]
+
+[node name="Button" type="Button" parent="RightPanel/rightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.13333334
+anchor_top = 0.47037038
+anchor_bottom = 0.52962965
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="RightPanel/rightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel/rightPanel/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer2/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer2/VBoxContainer/HBoxContainer3/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightPanel/rightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel/rightPanel/ScrollContainer"]
+custom_minimum_size = Vector2(288, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Power" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Power"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Building1" type="PanelContainer" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BuildUpgradeButton1" type="TextureButton" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="BuildLabel1" type="Label" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Building 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="BuildTimer1" type="Timer" parent="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1"]
 
 [node name="Trash" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -132,144 +692,11 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="leftPanel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.25
-anchor_bottom = 1.0
-offset_left = 1152.0
-offset_top = 648.0
-offset_right = 1151.9995
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_q1nc5")
-
-[node name="slideAnimation" type="AnimationPlayer" parent="leftPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_jvmy4")
-}
-
-[node name="disableTime" type="Timer" parent="leftPanel"]
-
-[node name="Button" type="Button" parent="leftPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0070001
-anchor_top = 0.469
-anchor_right = 1.146
-anchor_bottom = 0.531
-offset_left = -0.016021729
-offset_top = 0.08798218
-offset_right = -32.048004
-offset_bottom = -32.088013
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(5, 5)
-
-[node name="rightPanel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.75000006
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 287.99994
-offset_top = 648.0
-offset_right = 287.9995
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.1415927
-script = ExtResource("2_jvmy4")
-
-[node name="slideAnimation" type="AnimationPlayer" parent="rightPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_jvmy4")
-}
-
-[node name="disableTime" type="Timer" parent="rightPanel"]
-
-[node name="Button" type="Button" parent="rightPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0070001
-anchor_top = 0.469
-anchor_right = 1.146
-anchor_bottom = 0.531
-offset_left = -0.016021729
-offset_top = 0.08798218
-offset_right = -32.048004
-offset_bottom = -32.088013
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(5, 5)
-
-[node name="VScrollBar" type="VScrollBar" parent="rightPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.75000006
-offset_top = 486.0
-offset_right = 198.00049
-offset_bottom = 287.99997
-rotation = -1.5707964
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="rightPanel/VScrollBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 288.0
-offset_right = -198.0
-offset_bottom = 486.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -1.5707964
-
-[node name="Power" type="PanelContainer" parent="rightPanel/VScrollBar/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PowerUpgradeButton" type="TextureButton" parent="rightPanel/VScrollBar/VBoxContainer/Power"]
-layout_mode = 2
-texture_normal = ExtResource("2_mwyjx")
-texture_pressed = ExtResource("3_bm2gq")
-ignore_texture_size = true
-stretch_mode = 6
-
-[node name="PowerLabel" type="Label" parent="rightPanel/VScrollBar/VBoxContainer/Power"]
-layout_mode = 2
-text = "Power"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Building1" type="PanelContainer" parent="rightPanel/VScrollBar/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="BuildUpgradeButton1" type="TextureButton" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
-layout_mode = 2
-texture_normal = ExtResource("2_mwyjx")
-texture_pressed = ExtResource("3_bm2gq")
-ignore_texture_size = true
-stretch_mode = 6
-
-[node name="BuildLabel1" type="Label" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
-layout_mode = 2
-text = "Building 1"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="BuildTimer1" type="Timer" parent="rightPanel/VScrollBar/VBoxContainer/Building1"]
-
+[connection signal="timeout" from="LeftPanel/leftPanel/disableTime" to="LeftPanel/leftPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="LeftPanel/leftPanel/Button" to="LeftPanel/leftPanel" method="_on_button_pressed"]
+[connection signal="timeout" from="RightPanel/rightPanel/disableTime" to="RightPanel/rightPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="RightPanel/rightPanel/Button" to="RightPanel/rightPanel" method="_on_button_pressed"]
+[connection signal="pressed" from="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
+[connection signal="pressed" from="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
+[connection signal="timeout" from="RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1/BuildTimer1" to="." method="_on_build_timer_1_timeout"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]
-[connection signal="timeout" from="leftPanel/disableTime" to="leftPanel" method="_on_disable_time_timeout"]
-[connection signal="pressed" from="leftPanel/Button" to="leftPanel" method="_on_button_pressed"]
-[connection signal="timeout" from="rightPanel/disableTime" to="rightPanel" method="_on_disable_time_timeout"]
-[connection signal="pressed" from="rightPanel/Button" to="rightPanel" method="_on_button_pressed"]
-[connection signal="pressed" from="rightPanel/VScrollBar/VBoxContainer/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
-[connection signal="pressed" from="rightPanel/VScrollBar/VBoxContainer/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
-[connection signal="timeout" from="rightPanel/VScrollBar/VBoxContainer/Building1/BuildTimer1" to="." method="_on_build_timer_1_timeout"]
