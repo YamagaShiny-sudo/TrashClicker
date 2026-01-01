@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://j7w56q11xi33"]
+[gd_scene load_steps=4 format=3 uid="uid://j7w56q11xi33"]
 
-[ext_resource type="PackedScene" uid="uid://id3ekfa6qp5o" path="res://scenes/hud.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cluf3efj1r1j2" path="res://scenes/hud.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://n3a2jwky5gta" path="res://scenes/game_controller.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://d1dvbglqyjxuj" path="res://assets/Minimalistic Loops/loop.wav" id="3_lnu2h"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_yqjtg")
 
 [node name="HUD" parent="." instance=ExtResource("1_uwrxv")]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lnu2h")
+autoplay = true
+
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
