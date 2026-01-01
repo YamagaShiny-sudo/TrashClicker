@@ -1,12 +1,12 @@
 extends Panel
 
-@onready var slide_animation: AnimationPlayer = $slideAnimation
+@onready var slide_animation: AnimationPlayer = $SlideAnimation
 
 func _ready() -> void:
 	slide_animation.play("slide_out_left")
 
-@onready var button: Button = $Button
-@onready var disable_time: Timer = $disableTime
+@onready var button: Button = $CloseButton
+@onready var disable_time: Timer = $DisableTime
 var close = true
 func _on_button_pressed() -> void:
 	pass # Replace with function body.

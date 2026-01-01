@@ -18,7 +18,7 @@ func _main_button_pressed() -> void:
 	update_text()
 
 var power_cost = 2
-@onready var power_label: Label = $RightPanel/rightPanel/ScrollContainer/VBoxContainer/Power/PowerLabel
+@onready var power_label: Label = $RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power/PowerLabel
 func _on_power_upgrade_button_pressed() -> void:
 	if trash_score >= power_cost:
 		trash_score -= power_cost
@@ -28,8 +28,8 @@ func _on_power_upgrade_button_pressed() -> void:
 
 var build_cost_1 = 2
 var build_output_1 = 0
-@onready var build_timer_1: Timer = $RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1/BuildTimer1
-@onready var build_label_1: Label = $RightPanel/rightPanel/ScrollContainer/VBoxContainer/Building1/BuildLabel1
+@onready var build_timer_1: Timer = $RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildTimer1
+@onready var build_label_1: Label = $RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildLabel1
 func _on_build_upgrade_button_1_pressed() -> void:
 	if trash_score >= build_cost_1:
 		trash_score -= build_cost_1
