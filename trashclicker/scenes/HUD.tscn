@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cluf3efj1r1j2"]
+[gd_scene load_steps=13 format=3 uid="uid://dcs5cx6tebe2f"]
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
 [ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
@@ -125,16 +125,99 @@ libraries = {
 [node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0070001
-anchor_top = 0.469
-anchor_right = 1.146
-anchor_bottom = 0.531
-offset_left = -3.3600464
-offset_top = 1.4799805
-offset_right = -6.080017
-offset_bottom = -1.4800415
+anchor_left = 1.0
+anchor_top = 0.47000003
+anchor_right = 1.133
+anchor_bottom = 0.53000003
+offset_top = 0.39996338
+offset_right = 0.15997314
+offset_bottom = -0.4000244
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.5
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+
+[node name="Screen 1" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Screen 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Screen 2" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Screen 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SettingsLabel" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.125
+grow_horizontal = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WIPMusicBar" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7175926
+anchor_right = 1.0
+anchor_bottom = 0.8425926
+grow_horizontal = 2
+text = "WIP SoundEffectControlBar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WIPSoundEffectBar" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5462963
+anchor_right = 1.0
+anchor_bottom = 0.6712963
+grow_horizontal = 2
+text = "WIP MusicControlBar"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="RightMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -659,6 +742,16 @@ uppercase = true
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildTimer1" type="Timer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
+
+[node name="NewsLabel" type="Label" parent="RightMargin/RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.125
+grow_horizontal = 2
+text = "I'm a text"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Trash" type="PanelContainer" parent="."]
 layout_mode = 1
