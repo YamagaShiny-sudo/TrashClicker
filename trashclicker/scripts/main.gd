@@ -78,5 +78,5 @@ func speed_building_power() -> void:
 	speed_building_stop.start()
 
 func _on_speed_building_stop_timeout() -> void:
-	build_timer.wait_time *= 2
+	build_timer.wait_time = 1
 	speed_building_stop.stop()

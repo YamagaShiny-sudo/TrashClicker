@@ -17,6 +17,7 @@ func _on_fish_button_pressed() -> void:
 		multi(4)
 	elif effect[randomChoice] == "x5":
 		multi(5)
+	randomChoice = randf_range(0, 5)
 
 func multi(n : int) -> void:
 	hud.trash_score *= n
