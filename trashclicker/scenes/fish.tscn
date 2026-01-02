@@ -13,4 +13,10 @@ scale = Vector2(0.1, 0.1)
 icon = ExtResource("1_xu20i")
 metadata/_edit_use_anchors_ = true
 
+[node name="AutoDestroy" type="Timer" parent="."]
+process_callback = 0
+wait_time = 30.0
+autostart = true
+
 [connection signal="pressed" from="DetectButton" to="." method="_on_fish_button_pressed"]
+[connection signal="timeout" from="AutoDestroy" to="." method="_on_auto_destroy_timeout"]
