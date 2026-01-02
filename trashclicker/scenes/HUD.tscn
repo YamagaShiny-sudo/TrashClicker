@@ -121,6 +121,7 @@ libraries = {
 }
 
 [node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel"]
+process_callback = 0
 
 [node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel"]
 layout_mode = 1
@@ -241,6 +242,7 @@ libraries = {
 }
 
 [node name="DisableTime" type="Timer" parent="RightMargin/RightPanel"]
+process_callback = 0
 
 [node name="CloseButton" type="Button" parent="RightMargin/RightPanel"]
 layout_mode = 1
@@ -741,8 +743,6 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="BuildTimer1" type="Timer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
-
 [node name="NewsLabel" type="Label" parent="RightMargin/RightPanel"]
 layout_mode = 1
 anchors_preset = -1
@@ -786,6 +786,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="BuildingControl" type="Node" parent="."]
+
+[node name="BuildTimer" type="Timer" parent="BuildingControl"]
+unique_name_in_owner = true
+process_callback = 0
+
+[node name="SpeedBuildingStop" type="Timer" parent="BuildingControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 20.5
+
+[node name="PowerControl" type="Node" parent="."]
+
+[node name="AutoStop" type="Timer" parent="PowerControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 20.1
+
+[node name="AutoClickerTimer" type="Timer" parent="PowerControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.1
+
 [connection signal="timeout" from="LeftMargin/LeftPanel/DisableTime" to="LeftMargin/LeftPanel" method="_on_disable_time_timeout"]
 [connection signal="pressed" from="LeftMargin/LeftPanel/CloseButton" to="LeftMargin/LeftPanel" method="_on_button_pressed"]
 [connection signal="timeout" from="RightMargin/RightPanel/DisableTime" to="RightMargin/RightPanel" method="_on_disable_time_timeout"]
@@ -793,5 +816,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power/PowerUpgradeButton" to="RightMargin/RightPanel/OneTimeBuyable" method="_on_button_pressed"]
 [connection signal="pressed" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
 [connection signal="pressed" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
-[connection signal="timeout" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildTimer1" to="." method="_on_build_timer_1_timeout"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]
+[connection signal="timeout" from="BuildingControl/BuildTimer" to="." method="_on_build_timer_timeout"]
+[connection signal="timeout" from="BuildingControl/SpeedBuildingStop" to="." method="_on_speed_building_stop_timeout"]
+[connection signal="timeout" from="PowerControl/AutoStop" to="." method="_on_auto_stop_timeout"]
+[connection signal="timeout" from="PowerControl/AutoClickerTimer" to="." method="_on_auto_clicker_timer_timeout"]

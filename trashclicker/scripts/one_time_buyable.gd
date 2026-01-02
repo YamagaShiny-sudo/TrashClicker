@@ -2,7 +2,6 @@ extends ScrollContainer
 
 @onready var hud = get_node("../../..")
 
-
 @onready var power_upgrade_button: PanelContainer = $VBoxContainer/HBoxContainer/Power
 var up_cost = 10
 func _on_button_pressed() -> void:
