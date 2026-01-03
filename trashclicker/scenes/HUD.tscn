@@ -91,17 +91,10 @@ _data = {
 &"slide_out_right": SubResource("Animation_67toa")
 }
 
-[node name="HUD" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HUD" type="Node"]
 script = ExtResource("1_7dvtb")
 
 [node name="LeftMargin" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.25
 anchor_bottom = 1.0
@@ -221,7 +214,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="RightMargin" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
 anchor_right = 1.0
@@ -754,7 +746,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Trash" type="PanelContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.43489584
 anchor_top = 0.38425925
@@ -774,7 +765,6 @@ ignore_texture_size = true
 stretch_mode = 6
 
 [node name="ScoreLabel" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4813368
 anchor_top = 0.06666667
