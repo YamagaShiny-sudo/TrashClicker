@@ -2,7 +2,7 @@ extends Node
 
 @onready var score_label: Label = $ScoreLabel
 
-var trash_score = 0
+var trash_score : float = 0
 
 
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 #Updating the label
 func update_text() -> void:
-	format_score(trash_score)
+	score_label.text = "Trash collected: " + format(trash_score)
 	power_label.text = "Power \nCost: " + str(power_cost) + "\nOutput: " + str(output)
 
 var output = 1
@@ -31,21 +31,25 @@ func _on_power_upgrade_button_pressed() -> void:
 
 
 
-#Make the score 1000 to 1k and etc
-func format_score(score : int) -> void:
-	var lenght_score = len(str(score))
-	if lenght_score < 4:
-		score_label.text = "Trash collected: " + str(score)
-	elif lenght_score < 7:
-		score_label.text = "Trash collected: " + str("%.2f" % (float(score)/10**3), "K")
-	elif lenght_score < 10:
-		score_label.text = "Trash collected: " + str("%.2f" % (float(score)/10**6), "M")
-	elif lenght_score < 13:
-		score_label.text = "Trash collected: " + str("%.2f" % (float(score)/10**9), "B")
-	elif lenght_score < 16:
-		score_label.text = "Trash collected: " + str("%.2f" % (float(score)/10**12), "T")
-	elif lenght_score < 19:
-		score_label.text = "Trash collected: " + str("%.2f" % (float(score)/10**15), "Quad")
+#Make the any number 1000 to 1k and etc
+func format(number : float) -> String:
+	var lenght_number = len(str(int(number)))
+	if lenght_number < 4:
+		if str(number)[-1] == "0":
+			return str(int(number))
+		else:
+			return str("%.1f" % number)
+	elif lenght_number < 7:
+		return str("%.2f" % (number/10**3), "K")
+	elif lenght_number < 10:
+		return str("%.2f" % (number/10**6), "M")
+	elif lenght_number < 13:
+		return str("%.2f" % (number/10**9), "B")
+	elif lenght_number < 16:
+		return str("%.2f" % (float(number)/10**12), "T")
+	elif lenght_number < 19:
+		return str("%.2f" % (float(number)/10**15), "Quad")
+	return str(number)
 
 
 
@@ -79,10 +83,10 @@ func _on_speed_building_stop_timeout() -> void:
 
 
 #Adding to the score
-func addScore(amount:int) -> void:
+func addScore(amount:float) -> void:
 	trash_score += amount
 	update_text()
 #Substracting from the score
-func subScore(amount:int) -> void:
+func subScore(amount:float) -> void:
 	trash_score -= amount
 	update_text()

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
 [ext_resource type="Script" uid="uid://daapakk0tv4q3" path="res://scripts/one_time_buyable.gd" id="4_047uy"]
-[ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scenes/building.gd" id="7_k4w17"]
+[ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
 
 [sub_resource type="Animation" id="Animation_q1nc5"]
 length = 0.001
@@ -719,6 +719,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
+build_cost = 10.0
+build_output = 0.5
 build_label = NodePath("BuildLabel1")
 build_name = "Building 1"
 build_button = NodePath("BuildUpgradeButton1")
@@ -745,8 +747,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
-build_cost = 4
-build_output = 2
+build_cost = 1000.0
+build_output = 100.0
 build_label = NodePath("BuildLabel2")
 build_name = "Building 2"
 build_button = NodePath("BuildUpgradeButton2")
