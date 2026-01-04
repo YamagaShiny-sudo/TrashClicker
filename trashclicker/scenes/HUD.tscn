@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcs5cx6tebe2f"]
+[gd_scene load_steps=14 format=3 uid="uid://dcs5cx6tebe2f"]
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
 [ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
 [ext_resource type="Script" uid="uid://daapakk0tv4q3" path="res://scripts/one_time_buyable.gd" id="4_047uy"]
+[ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scenes/building.gd" id="7_k4w17"]
 
 [sub_resource type="Animation" id="Animation_q1nc5"]
 length = 0.001
@@ -713,10 +714,14 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Building1" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade"]
+[node name="Building1" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("7_k4w17")
+build_label = NodePath("BuildLabel1")
+build_name = "Building 1"
+build_button = NodePath("BuildUpgradeButton1")
 
 [node name="BuildUpgradeButton1" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
 custom_minimum_size = Vector2(480, 202.5)
@@ -730,6 +735,34 @@ stretch_mode = 6
 layout_mode = 2
 size_flags_vertical = 1
 text = "Building 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Building2" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("7_k4w17")
+build_cost = 4
+build_output = 2
+build_label = NodePath("BuildLabel2")
+build_name = "Building 2"
+build_button = NodePath("BuildUpgradeButton2")
+
+[node name="BuildUpgradeButton2" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="BuildLabel2" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Building 2"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -781,6 +814,7 @@ metadata/_edit_use_anchors_ = true
 [node name="BuildTimer" type="Timer" parent="BuildingControl"]
 unique_name_in_owner = true
 process_callback = 0
+autostart = true
 
 [node name="SpeedBuildingStop" type="Timer" parent="BuildingControl"]
 unique_name_in_owner = true
@@ -805,9 +839,7 @@ wait_time = 0.1
 [connection signal="pressed" from="RightMargin/RightPanel/CloseButton" to="RightMargin/RightPanel" method="_on_button_pressed"]
 [connection signal="pressed" from="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power/PowerUpgradeButton" to="RightMargin/RightPanel/OneTimeBuyable" method="_on_button_pressed"]
 [connection signal="pressed" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
-[connection signal="pressed" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildUpgradeButton1" to="." method="_on_build_upgrade_button_1_pressed"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]
-[connection signal="timeout" from="BuildingControl/BuildTimer" to="." method="_on_build_timer_timeout"]
 [connection signal="timeout" from="BuildingControl/SpeedBuildingStop" to="." method="_on_speed_building_stop_timeout"]
 [connection signal="timeout" from="PowerControl/AutoStop" to="." method="_on_auto_stop_timeout"]
 [connection signal="timeout" from="PowerControl/AutoClickerTimer" to="." method="_on_auto_clicker_timer_timeout"]

@@ -16,7 +16,6 @@ func _ready() -> void:
 func update_text() -> void:
 	format_score(trash_score)
 	power_label.text = "Power \nCost: " + str(power_cost) + "\nOutput: " + str(output)
-	build_label_1.text = "Building 1 \nCost: " + str(build_cost_1) + "\nOutput: " + str(build_output_1)
 
 var output = 1
 func _main_button_pressed() -> void:
@@ -29,23 +28,6 @@ func _on_power_upgrade_button_pressed() -> void:
 		subScore(power_cost)
 		output += 1
 		power_cost += 1
-
-
-
-#Building insitialisation
-var build_cost_1 = 2
-var build_output_1 = 0
-@onready var build_timer: Timer = %BuildTimer
-@onready var build_label_1: Label = $RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1/BuildLabel1
-func _on_build_upgrade_button_1_pressed() -> void:
-	if trash_score >= build_cost_1:
-		subScore(build_cost_1)
-		build_output_1 += 1
-		build_cost_1 += 1
-		build_timer.start()
-#Building adding score
-func _on_build_timer_timeout() -> void:
-	addScore(build_output_1)
 
 
 
@@ -85,6 +67,7 @@ func _on_auto_stop_timeout() -> void:
 
 #Speed Building PowerUP
 @onready var speed_building_stop: Timer = %SpeedBuildingStop
+@onready var build_timer = %BuildTimer
 func speed_building_power() -> void:
 	build_timer.wait_time /= 2
 	speed_building_stop.start()
