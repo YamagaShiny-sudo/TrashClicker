@@ -1,39 +1,847 @@
-[gd_scene load_steps=4 format=3 uid="uid://dekjqqg5vq8tj"]
+[gd_scene load_steps=14 format=3 uid="uid://dcs5cx6tebe2f"]
 
-[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="1_jdy6l"]
-[ext_resource type="Script" path="res://scenes/trash_button.gd" id="2_qkxfn"]
+[ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
+[ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
+[ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
+[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
+[ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
+[ext_resource type="Script" uid="uid://daapakk0tv4q3" path="res://scripts/one_time_buyable.gd" id="4_047uy"]
+[ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_yamru"]
-font_size = 75
+[sub_resource type="Animation" id="Animation_q1nc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 0)]
+}
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[sub_resource type="Animation" id="Animation_jvmy4"]
+resource_name = "slide_in_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(-480, 0), Vector2(0, 0)]
+}
 
-[node name="score_label" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -21.5
-offset_right = 21.5
-offset_bottom = 103.0
+[sub_resource type="Animation" id="Animation_en2g2"]
+resource_name = "slide_in_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1920, 0), Vector2(1440, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e4cfk"]
+resource_name = "slide_out_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-480, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_67toa"]
+resource_name = "slide_out_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1440, 0), Vector2(1920, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jvmy4"]
+_data = {
+&"RESET": SubResource("Animation_q1nc5"),
+&"slide_in_left": SubResource("Animation_jvmy4"),
+&"slide_in_right": SubResource("Animation_en2g2"),
+&"slide_out_left": SubResource("Animation_e4cfk"),
+&"slide_out_right": SubResource("Animation_67toa")
+}
+
+[node name="HUD" type="Node"]
+script = ExtResource("1_7dvtb")
+
+[node name="LeftMargin" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_right = 1920.0
 grow_horizontal = 2
-text = "0
-"
-label_settings = SubResource("LabelSettings_yamru")
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftPanel" type="Panel" parent="LeftMargin"]
+layout_mode = 2
+script = ExtResource("1_q1nc5")
+
+[node name="SlideAnimation" type="AnimationPlayer" parent="LeftMargin/LeftPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel"]
+process_callback = 0
+
+[node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.47000003
+anchor_right = 1.133
+anchor_bottom = 0.53000003
+offset_top = 0.39996338
+offset_right = 0.15997314
+offset_bottom = -0.4000244
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.5
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+
+[node name="Screen 1" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Screen 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Screen 2" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Screen 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SettingsLabel" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.125
+grow_horizontal = 2
+text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="trash_button" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -544.0
-offset_top = -542.5
-offset_right = 544.0
-offset_bottom = 542.5
+[node name="WIPMusicBar" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7175926
+anchor_right = 1.0
+anchor_bottom = 0.8425926
+grow_horizontal = 2
+text = "WIP SoundEffectControlBar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WIPSoundEffectBar" type="Label" parent="LeftMargin/LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5462963
+anchor_right = 1.0
+anchor_bottom = 0.6712963
+grow_horizontal = 2
+text = "WIP MusicControlBar"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RightMargin" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_right = 480.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("1_jdy6l")
-icon_alignment = 1
-script = ExtResource("2_qkxfn")
+metadata/_edit_use_anchors_ = true
+
+[node name="RightPanel" type="Panel" parent="RightMargin"]
+layout_mode = 2
+script = ExtResource("2_jvmy4")
+
+[node name="SlideAnimation" type="AnimationPlayer" parent="RightMargin/RightPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_jvmy4")
+}
+
+[node name="DisableTime" type="Timer" parent="RightMargin/RightPanel"]
+process_callback = 0
+
+[node name="CloseButton" type="Button" parent="RightMargin/RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.13333334
+anchor_top = 0.47037038
+anchor_bottom = 0.52962965
+metadata/_edit_use_anchors_ = true
+
+[node name="OneTimeBuyable" type="ScrollContainer" parent="RightMargin/RightPanel"]
+layout_mode = 0
+offset_top = 135.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+script = ExtResource("4_047uy")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollUpgrade" type="ScrollContainer" parent="RightMargin/RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="BoxUpgrade" type="VBoxContainer" parent="RightMargin/RightPanel/ScrollUpgrade"]
+custom_minimum_size = Vector2(288, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Power"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Building1" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("7_k4w17")
+build_cost = 10.0
+build_output = 0.5
+build_label = NodePath("BuildLabel1")
+build_name = "Building 1"
+build_button = NodePath("BuildUpgradeButton1")
+
+[node name="BuildUpgradeButton1" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="BuildLabel1" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Building 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Building2" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("7_k4w17")
+build_cost = 1000.0
+build_output = 100.0
+build_label = NodePath("BuildLabel2")
+build_name = "Building 2"
+build_button = NodePath("BuildUpgradeButton2")
+
+[node name="BuildUpgradeButton2" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+custom_minimum_size = Vector2(480, 202.5)
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="BuildLabel2" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Building 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="NewsLabel" type="Label" parent="RightMargin/RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.125
+grow_horizontal = 2
+text = "I'm a text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Trash" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.43489584
+anchor_top = 0.38425925
+anchor_right = 0.5651042
+anchor_bottom = 0.6157407
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TrashButton" type="TextureButton" parent="Trash"]
+layout_mode = 2
+texture_normal = ExtResource("2_mwyjx")
+texture_pressed = ExtResource("3_bm2gq")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.4813368
+anchor_top = 0.06666667
+anchor_right = 0.52473956
+anchor_bottom = 0.14382716
+grow_horizontal = 2
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BuildingControl" type="Node" parent="."]
+
+[node name="BuildTimer" type="Timer" parent="BuildingControl"]
+unique_name_in_owner = true
+process_callback = 0
+autostart = true
+
+[node name="SpeedBuildingStop" type="Timer" parent="BuildingControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 20.5
+
+[node name="PowerControl" type="Node" parent="."]
+
+[node name="AutoStop" type="Timer" parent="PowerControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 20.1
+
+[node name="AutoClickerTimer" type="Timer" parent="PowerControl"]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.1
+
+[connection signal="timeout" from="LeftMargin/LeftPanel/DisableTime" to="LeftMargin/LeftPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="LeftMargin/LeftPanel/CloseButton" to="LeftMargin/LeftPanel" method="_on_button_pressed"]
+[connection signal="timeout" from="RightMargin/RightPanel/DisableTime" to="RightMargin/RightPanel" method="_on_disable_time_timeout"]
+[connection signal="pressed" from="RightMargin/RightPanel/CloseButton" to="RightMargin/RightPanel" method="_on_button_pressed"]
+[connection signal="pressed" from="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power/PowerUpgradeButton" to="RightMargin/RightPanel/OneTimeBuyable" method="_on_button_pressed"]
+[connection signal="pressed" from="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
+[connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]
+[connection signal="timeout" from="BuildingControl/SpeedBuildingStop" to="." method="_on_speed_building_stop_timeout"]
+[connection signal="timeout" from="PowerControl/AutoStop" to="." method="_on_auto_stop_timeout"]
+[connection signal="timeout" from="PowerControl/AutoClickerTimer" to="." method="_on_auto_clicker_timer_timeout"]

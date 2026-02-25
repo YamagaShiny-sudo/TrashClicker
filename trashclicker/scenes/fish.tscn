@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://35625lcu2c8p"]
+
+[ext_resource type="Script" uid="uid://ce3ldyt0pvm3c" path="res://scripts/fish.gd" id="1_8g0i4"]
+[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="1_xu20i"]
+
+[node name="Fish" type="Node2D"]
+script = ExtResource("1_8g0i4")
+
+[node name="DetectButton" type="Button" parent="."]
+offset_right = 1088.0
+offset_bottom = 1085.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("1_xu20i")
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoDestroy" type="Timer" parent="."]
+process_callback = 0
+wait_time = 30.0
+autostart = true
+
+[connection signal="pressed" from="DetectButton" to="." method="_on_fish_button_pressed"]
+[connection signal="timeout" from="AutoDestroy" to="." method="_on_auto_destroy_timeout"]

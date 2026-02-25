@@ -1,9 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://7k8fvf4hfu8j"]
+[gd_scene load_steps=6 format=3 uid="uid://j7w56q11xi33"]
 
-[ext_resource type="PackedScene" uid="uid://dekjqqg5vq8tj" path="res://scenes/HUD.tscn" id="1_36rmf"]
+[ext_resource type="PackedScene" uid="uid://dcs5cx6tebe2f" path="res://scenes/HUD.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://n3a2jwky5gta" path="res://scripts/game_controller.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://d1dvbglqyjxuj" path="res://assets/Minimalistic Loops/loop.wav" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://cmq7casl0sam2" path="res://scripts/fish_spawner.gd" id="5_iywne"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lbhrr"]
+b = Vector2(0, 810)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("1_36rmf")]
+[node name="Main" type="Node"]
+script = ExtResource("1_yqjtg")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lnu2h")
+autoplay = true
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("5_iywne")
+
+[node name="RightSpawner" type="StaticBody2D" parent="Spawner"]
+position = Vector2(2120, 135)
+
+[node name="RightSpawnLine" type="CollisionShape2D" parent="Spawner/RightSpawner"]
+shape = SubResource("SegmentShape2D_lbhrr")
+
+[node name="LeftSpawner" type="StaticBody2D" parent="Spawner"]
+position = Vector2(-200, 135)
+
+[node name="LeftSpawnLine" type="CollisionShape2D" parent="Spawner/LeftSpawner"]
+shape = SubResource("SegmentShape2D_lbhrr")
+
+[node name="SpawnTimer" type="Timer" parent="Spawner"]
+process_callback = 0
+
+[node name="HUD" parent="." instance=ExtResource("1_uwrxv")]
+
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
+[connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]

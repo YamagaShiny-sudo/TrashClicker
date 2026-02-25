@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6jj07a2e6kjv"
+path="res://.godot/imported/loopThree.wav-68429c438d34e118b2f8abd781543eab.sample"
+
+[deps]
+
+source_file="res://assets/Minimalistic Loops/loopThree.wav"
+dest_files=["res://.godot/imported/loopThree.wav-68429c438d34e118b2f8abd781543eab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

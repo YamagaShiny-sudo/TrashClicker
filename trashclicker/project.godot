@@ -11,6 +11,15 @@ config_version=5
 [application]
 
 config/name="TrashClicker"
-run/main_scene="res://scenes/game.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="uid://j7w56q11xi33"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
