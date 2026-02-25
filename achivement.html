@@ -118,6 +118,70 @@
         .species:hover .tooltip {
             opacity: 1;
         }
+
+        /* --- POPUP --- */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .popup-content {
+            color: #ffffff; 
+            text-shadow: 0 0 8px cyan;
+            width: 420px;
+            padding: 25px;
+            border-radius: 20px;
+
+            /* effet verre futuriste */
+            background: rgba(20, 20, 30, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.25),
+                        inset 0 0 20px rgba(0, 255, 255, 0.15);
+
+            text-align: center;
+            animation: popupAppear 0.3s ease;
+        }
+
+        @keyframes popupAppear {
+            from { transform: scale(0.8); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-content img {
+            width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px cyan);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 22px;
+            cursor: pointer;
+            color: cyan;
+            text-shadow: 0 0 10px cyan;
+        }
+
     </style>
 </head>
 <body>
@@ -142,6 +206,16 @@
         <button onclick="switchTab('achievements')">Achievements</button>
         <button onclick="goSettings()">Settings</button>
         <button onclick="quitGame()">Quitter</button>
+    </div>
+
+    <!-- POPUP ALIEN / AERO-TECHNO --> 
+    <div id="popup" class="popup hidden"> 
+        <div class="popup-content"> 
+            <span id="popup-close" class="popup-close">✖</span> 
+            <img id="popup-img" src="" alt=""> 
+            <h2 id="popup-title"></h2> 
+            <p id="popup-text"></p> 
+        </div> 
     </div>
 
 
@@ -195,8 +269,9 @@
                 div.appendChild(tooltip);
 
                 div.addEventListener("click", () => {
-                    alert(species.name + " : " + species.intro);
+                    openPopup(species);
                 });
+
             }
 
             // Position initiale aléatoire
@@ -277,6 +352,30 @@
     // Fonctions boutons
     function goSettings() { alert("Ouvrir les paramètres !"); }
     function quitGame() { alert("Quitter le jeu !"); }
+
+    // --- POPUP SYSTEM ---
+    const popup = document.getElementById("popup");
+    const popupImg = document.getElementById("popup-img");
+    const popupTitle = document.getElementById("popup-title");
+    const popupText = document.getElementById("popup-text");
+    const popupClose = document.getElementById("popup-close");
+
+    function openPopup(species) {
+        popupImg.src = species.img;
+        popupTitle.textContent = species.name;
+        popupText.textContent = species.intro;
+
+        popup.classList.remove("hidden");
+    }
+
+    popupClose.addEventListener("click", () => {
+        popup.classList.add("hidden");
+    });
+
+    // fermer en cliquant en dehors
+    popup.addEventListener("click", (e) => {
+        if (e.target === popup) popup.classList.add("hidden");
+    });
 
 
 
