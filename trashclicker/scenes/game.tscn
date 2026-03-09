@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://j7w56q11xi33"]
+[gd_scene format=3 uid="uid://j7w56q11xi33"]
 
 [ext_resource type="PackedScene" uid="uid://dcs5cx6tebe2f" path="res://scenes/HUD.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://n3a2jwky5gta" path="res://scripts/game_controller.gd" id="1_yqjtg"]
@@ -8,32 +8,32 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lbhrr"]
 b = Vector2(0, 810)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=448722216]
 script = ExtResource("1_yqjtg")
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=807068674]
 stream = ExtResource("3_lnu2h")
 autoplay = true
 
-[node name="Spawner" type="Node" parent="."]
+[node name="Spawner" type="Node" parent="." unique_id=1671951059]
 script = ExtResource("5_iywne")
 
-[node name="RightSpawner" type="StaticBody2D" parent="Spawner"]
+[node name="RightSpawner" type="StaticBody2D" parent="Spawner" unique_id=886113077]
 position = Vector2(2120, 135)
 
-[node name="RightSpawnLine" type="CollisionShape2D" parent="Spawner/RightSpawner"]
+[node name="RightSpawnLine" type="CollisionShape2D" parent="Spawner/RightSpawner" unique_id=283531056]
 shape = SubResource("SegmentShape2D_lbhrr")
 
-[node name="LeftSpawner" type="StaticBody2D" parent="Spawner"]
+[node name="LeftSpawner" type="StaticBody2D" parent="Spawner" unique_id=1962710021]
 position = Vector2(-200, 135)
 
-[node name="LeftSpawnLine" type="CollisionShape2D" parent="Spawner/LeftSpawner"]
+[node name="LeftSpawnLine" type="CollisionShape2D" parent="Spawner/LeftSpawner" unique_id=2138898235]
 shape = SubResource("SegmentShape2D_lbhrr")
 
-[node name="SpawnTimer" type="Timer" parent="Spawner"]
+[node name="SpawnTimer" type="Timer" parent="Spawner" unique_id=271110277]
 process_callback = 0
 
-[node name="HUD" parent="." instance=ExtResource("1_uwrxv")]
+[node name="HUD" parent="." unique_id=1877270055 instance=ExtResource("1_uwrxv")]
 
 [connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcs5cx6tebe2f"]
+[gd_scene format=3 uid="uid://dcs5cx6tebe2f"]
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
 [ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
 [ext_resource type="Script" uid="uid://daapakk0tv4q3" path="res://scripts/one_time_buyable.gd" id="4_047uy"]
 [ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
+[ext_resource type="Texture2D" uid="uid://dvhder5psjgc4" path="res://assets/poubelle_modele_1.png" id="8_8cuoo"]
+[ext_resource type="Texture2D" uid="uid://chsayojk0kcp2" path="res://assets/poubelle_modele_3.png" id="9_cf6ij"]
 
 [sub_resource type="Animation" id="Animation_q1nc5"]
 length = 0.001
@@ -92,10 +94,12 @@ _data = {
 &"slide_out_right": SubResource("Animation_67toa")
 }
 
-[node name="HUD" type="Node"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cuoo"]
+
+[node name="HUD" type="Node" unique_id=1416034342]
 script = ExtResource("1_7dvtb")
 
-[node name="LeftMargin" type="MarginContainer" parent="."]
+[node name="LeftMargin" type="MarginContainer" parent="." unique_id=193669928]
 anchors_preset = -1
 anchor_right = 0.25
 anchor_bottom = 1.0
@@ -105,19 +109,17 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="LeftPanel" type="Panel" parent="LeftMargin"]
+[node name="LeftPanel" type="Panel" parent="LeftMargin" unique_id=887081378]
 layout_mode = 2
 script = ExtResource("1_q1nc5")
 
-[node name="SlideAnimation" type="AnimationPlayer" parent="LeftMargin/LeftPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_jvmy4")
-}
+[node name="SlideAnimation" type="AnimationPlayer" parent="LeftMargin/LeftPanel" unique_id=295688850]
+libraries/ = SubResource("AnimationLibrary_jvmy4")
 
-[node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel"]
+[node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel" unique_id=535733085]
 process_callback = 0
 
-[node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel"]
+[node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel" unique_id=1985162969]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -130,7 +132,7 @@ offset_bottom = -0.4000244
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel"]
+[node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel" unique_id=2141164923]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.25
@@ -139,19 +141,19 @@ anchor_bottom = 0.5
 size_flags_horizontal = 3
 theme_override_constants/separation = 50
 
-[node name="Screen 1" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+[node name="Screen 1" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings" unique_id=176453853]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 1" unique_id=173148978]
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
 texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 1"]
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 1" unique_id=82934993]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Screen 1"
@@ -160,19 +162,19 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Screen 2" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings"]
+[node name="Screen 2" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings" unique_id=1287283486]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 2" unique_id=274890069]
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
 texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 2"]
+[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 2" unique_id=1461710198]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Screen 2"
@@ -181,7 +183,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="SettingsLabel" type="Label" parent="LeftMargin/LeftPanel"]
+[node name="SettingsLabel" type="Label" parent="LeftMargin/LeftPanel" unique_id=1310078360]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -191,7 +193,7 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WIPMusicBar" type="Label" parent="LeftMargin/LeftPanel"]
+[node name="WIPMusicBar" type="Label" parent="LeftMargin/LeftPanel" unique_id=1204651226]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.7175926
@@ -202,7 +204,7 @@ text = "WIP SoundEffectControlBar"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WIPSoundEffectBar" type="Label" parent="LeftMargin/LeftPanel"]
+[node name="WIPSoundEffectBar" type="Label" parent="LeftMargin/LeftPanel" unique_id=776560708]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5462963
@@ -214,7 +216,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="RightMargin" type="MarginContainer" parent="."]
+[node name="RightMargin" type="MarginContainer" parent="." unique_id=76391960]
 anchors_preset = -1
 anchor_left = 0.75
 anchor_right = 1.0
@@ -225,19 +227,17 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="RightPanel" type="Panel" parent="RightMargin"]
+[node name="RightPanel" type="Panel" parent="RightMargin" unique_id=815910518]
 layout_mode = 2
 script = ExtResource("2_jvmy4")
 
-[node name="SlideAnimation" type="AnimationPlayer" parent="RightMargin/RightPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_jvmy4")
-}
+[node name="SlideAnimation" type="AnimationPlayer" parent="RightMargin/RightPanel" unique_id=450091479]
+libraries/ = SubResource("AnimationLibrary_jvmy4")
 
-[node name="DisableTime" type="Timer" parent="RightMargin/RightPanel"]
+[node name="DisableTime" type="Timer" parent="RightMargin/RightPanel" unique_id=332542832]
 process_callback = 0
 
-[node name="CloseButton" type="Button" parent="RightMargin/RightPanel"]
+[node name="CloseButton" type="Button" parent="RightMargin/RightPanel" unique_id=1798062590]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.13333334
@@ -245,7 +245,7 @@ anchor_top = 0.47037038
 anchor_bottom = 0.52962965
 metadata/_edit_use_anchors_ = true
 
-[node name="OneTimeBuyable" type="ScrollContainer" parent="RightMargin/RightPanel"]
+[node name="OneTimeBuyable" type="ScrollContainer" parent="RightMargin/RightPanel" unique_id=1716031065]
 layout_mode = 0
 offset_top = 135.0
 offset_right = 480.0
@@ -257,22 +257,22 @@ vertical_scroll_mode = 3
 script = ExtResource("4_047uy")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable"]
+[node name="VBoxContainer" type="VBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable" unique_id=294424174]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer" unique_id=1626239698]
 layout_mode = 2
 theme_override_constants/separation = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=345209300]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power" unique_id=611457407]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -280,7 +280,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power" unique_id=1530757595]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -289,12 +289,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=130544653]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2" unique_id=1527639480]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -302,7 +302,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power2" unique_id=1314498891]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -311,12 +311,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=376933498]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3" unique_id=955860560]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -324,7 +324,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power3" unique_id=745159615]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -333,12 +333,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=1453206721]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4" unique_id=437623488]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -346,7 +346,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power4" unique_id=506098643]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -355,12 +355,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=1702963866]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5" unique_id=801359056]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -368,7 +368,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power5" unique_id=702793308]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -377,12 +377,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer"]
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer" unique_id=870140380]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6" unique_id=1752876955]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -390,7 +390,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer/Power6" unique_id=646425408]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -399,17 +399,17 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer" unique_id=1031901260]
 layout_mode = 2
 theme_override_constants/separation = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=342431482]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power" unique_id=1666861933]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -417,7 +417,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power" unique_id=1921731531]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -426,12 +426,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=213384183]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2" unique_id=1341824126]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -439,7 +439,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power2" unique_id=1198406934]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -448,12 +448,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=1176154561]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3" unique_id=704258731]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -461,7 +461,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power3" unique_id=392639930]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -470,12 +470,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=428147390]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4" unique_id=1017536431]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -483,7 +483,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power4" unique_id=1283498158]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -492,12 +492,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=1908609591]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5" unique_id=1454270699]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -505,7 +505,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power5" unique_id=2037445212]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -514,12 +514,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2"]
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2" unique_id=1885473413]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6" unique_id=1421920119]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -527,7 +527,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer2/Power6" unique_id=986989159]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -536,17 +536,17 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer" unique_id=942025243]
 layout_mode = 2
 theme_override_constants/separation = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=1270157380]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power" unique_id=1415051156]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -554,7 +554,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power" unique_id=11068919]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -563,12 +563,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power2" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=15277998]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2" unique_id=1444860107]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -576,7 +576,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power2" unique_id=238447770]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -585,12 +585,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power3" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=591592644]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3" unique_id=181026909]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -598,7 +598,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power3" unique_id=49479480]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -607,12 +607,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power4" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=869692260]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4" unique_id=1857834718]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -620,7 +620,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power4" unique_id=1955124772]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -629,12 +629,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power5" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=1386428459]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5" unique_id=1681545330]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -642,7 +642,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power5" unique_id=2121048304]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -651,12 +651,12 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3"]
+[node name="Power6" type="PanelContainer" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3" unique_id=780267642]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6" unique_id=1409732660]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -664,7 +664,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/OneTimeBuyable/VBoxContainer/HBoxContainer3/Power6" unique_id=1597210888]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -673,7 +673,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="ScrollUpgrade" type="ScrollContainer" parent="RightMargin/RightPanel"]
+[node name="ScrollUpgrade" type="ScrollContainer" parent="RightMargin/RightPanel" unique_id=1957181153]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.25
@@ -685,19 +685,19 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="BoxUpgrade" type="VBoxContainer" parent="RightMargin/RightPanel/ScrollUpgrade"]
+[node name="BoxUpgrade" type="VBoxContainer" parent="RightMargin/RightPanel/ScrollUpgrade" unique_id=412004639]
 custom_minimum_size = Vector2(288, 240)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade"]
+[node name="Power" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" unique_id=1452742545]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power"]
+[node name="PowerUpgradeButton" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power" unique_id=590627016]
 custom_minimum_size = Vector2(480, 202.5)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -705,7 +705,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power"]
+[node name="PowerLabel" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power" unique_id=657856668]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Power"
@@ -714,7 +714,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Building1" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
+[node name="Building1" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" unique_id=136728260 node_paths=PackedStringArray("build_label", "build_button")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -725,7 +725,7 @@ build_label = NodePath("BuildLabel1")
 build_name = "Building 1"
 build_button = NodePath("BuildUpgradeButton1")
 
-[node name="BuildUpgradeButton1" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
+[node name="BuildUpgradeButton1" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1" unique_id=2071962234]
 custom_minimum_size = Vector2(480, 202.5)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -733,7 +733,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="BuildLabel1" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1"]
+[node name="BuildLabel1" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1" unique_id=1183036274]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Building 1"
@@ -742,7 +742,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Building2" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" node_paths=PackedStringArray("build_label", "build_button")]
+[node name="Building2" type="PanelContainer" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade" unique_id=2133865992 node_paths=PackedStringArray("build_label", "build_button")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -753,7 +753,7 @@ build_label = NodePath("BuildLabel2")
 build_name = "Building 2"
 build_button = NodePath("BuildUpgradeButton2")
 
-[node name="BuildUpgradeButton2" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+[node name="BuildUpgradeButton2" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2" unique_id=1604771222]
 custom_minimum_size = Vector2(480, 202.5)
 layout_mode = 2
 texture_normal = ExtResource("2_mwyjx")
@@ -761,7 +761,7 @@ texture_pressed = ExtResource("3_bm2gq")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="BuildLabel2" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2"]
+[node name="BuildLabel2" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2" unique_id=1486873310]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Building 2"
@@ -770,7 +770,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="NewsLabel" type="Label" parent="RightMargin/RightPanel"]
+[node name="NewsLabel" type="Label" parent="RightMargin/RightPanel" unique_id=933292186]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -780,57 +780,57 @@ text = "I'm a text"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Trash" type="PanelContainer" parent="."]
+[node name="Trash" type="PanelContainer" parent="." unique_id=1412846678]
 anchors_preset = -1
 anchor_left = 0.43489584
 anchor_top = 0.38425925
 anchor_right = 0.5651042
 anchor_bottom = 0.6157407
-offset_bottom = 3.0517578e-05
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8cuoo")
 metadata/_edit_use_anchors_ = true
 
-[node name="TrashButton" type="TextureButton" parent="Trash"]
+[node name="TrashButton" type="TextureButton" parent="Trash" unique_id=363439072]
 layout_mode = 2
-texture_normal = ExtResource("2_mwyjx")
-texture_pressed = ExtResource("3_bm2gq")
+texture_normal = ExtResource("8_8cuoo")
+texture_pressed = ExtResource("9_cf6ij")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="ScoreLabel" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.4813368
-anchor_top = 0.06666667
-anchor_right = 0.52473956
-anchor_bottom = 0.14382716
-grow_horizontal = 2
+[node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1820173823]
+offset_left = 756.3334
+offset_top = 72.0
+offset_right = 1132.0
+offset_bottom = 112.0
 text = "Score"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="BuildingControl" type="Node" parent="."]
+[node name="BuildingControl" type="Node" parent="." unique_id=1586874984]
 
-[node name="BuildTimer" type="Timer" parent="BuildingControl"]
+[node name="BuildTimer" type="Timer" parent="BuildingControl" unique_id=2100069085]
 unique_name_in_owner = true
 process_callback = 0
 autostart = true
 
-[node name="SpeedBuildingStop" type="Timer" parent="BuildingControl"]
+[node name="SpeedBuildingStop" type="Timer" parent="BuildingControl" unique_id=795199031]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 20.5
 
-[node name="PowerControl" type="Node" parent="."]
+[node name="PowerControl" type="Node" parent="." unique_id=708972615]
 
-[node name="AutoStop" type="Timer" parent="PowerControl"]
+[node name="AutoStop" type="Timer" parent="PowerControl" unique_id=806734599]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 20.1
 
-[node name="AutoClickerTimer" type="Timer" parent="PowerControl"]
+[node name="AutoClickerTimer" type="Timer" parent="PowerControl" unique_id=2135073081]
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1

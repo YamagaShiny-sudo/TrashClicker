@@ -1,6 +1,6 @@
 extends Node
 
-@onready var score_label: Label = $ScoreLabel
+@onready var score_label: RichTextLabel = $ScoreLabel
 
 var trash_score : float = 0
 
