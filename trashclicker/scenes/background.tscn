@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://djunbtyifxxdt"]
+
+[ext_resource type="Texture2D" uid="uid://boowu6lchvt08" path="res://assets/background.jpg" id="1_bkp1e"]
+
+[node name="Node" type="Node" unique_id=1772365361]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1898653218]
+z_index = -100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1_bkp1e")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
