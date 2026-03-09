@@ -1,10 +1,9 @@
 extends Node
 
 @onready var score_label: RichTextLabel = $ScoreLabel
+@onready var power_label: Label = $RightMargin/RightPanel/ManuelOutputLabel
 
 var trash_score : float = 0
-
-
 
 #Initialising at the start
 func _ready() -> void:
@@ -15,19 +14,11 @@ func _ready() -> void:
 #Updating the label
 func update_text() -> void:
 	score_label.text = "Trash collected: " + format(trash_score)
-	power_label.text = "Power \nCost: " + str(power_cost) + "\nOutput: " + str(output)
+	power_label.text = "Manual output: " + format(output)
 
 var output = 1
 func _main_button_pressed() -> void:
 	addScore(output)
-
-var power_cost = 2
-@onready var power_label: Label = $RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Power/PowerLabel
-func _on_power_upgrade_button_pressed() -> void:
-	if trash_score >= power_cost:
-		subScore(power_cost)
-		output += 1
-		power_cost += 1
 
 
 
@@ -46,9 +37,11 @@ func format(number : float) -> String:
 	elif lenght_number < 13:
 		return str("%.2f" % (number/10**9), "B")
 	elif lenght_number < 16:
-		return str("%.2f" % (float(number)/10**12), "T")
+		return str("%.2f" % (number/10**12), "T")
 	elif lenght_number < 19:
-		return str("%.2f" % (float(number)/10**15), "Quad")
+		return str("%.2f" % (number/10**15), "Quad")
+	elif lenght_number < 22:
+		return str("%.2f" % (number/10**17), "Quint")
 	return str(number)
 
 
