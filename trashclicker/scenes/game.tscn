@@ -36,6 +36,7 @@ shape = SubResource("SegmentShape2D_lbhrr")
 
 [node name="SpawnTimer" type="Timer" parent="Spawner" unique_id=271110277]
 process_callback = 0
+wait_time = 60.0
 
 [node name="HUD" parent="." unique_id=1877270055 instance=ExtResource("1_uwrxv")]
 

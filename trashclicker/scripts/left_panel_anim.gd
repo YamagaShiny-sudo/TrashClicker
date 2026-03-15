@@ -9,7 +9,6 @@ func _ready() -> void:
 @onready var disable_time: Timer = $DisableTime
 var close = true
 func _on_button_pressed() -> void:
-	pass # Replace with function body.
 	if close:
 		button.disabled = true
 		slide_animation.play("slide_in_left")

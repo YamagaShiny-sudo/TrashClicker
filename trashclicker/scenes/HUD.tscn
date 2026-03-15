@@ -5,95 +5,16 @@
 [ext_resource type="Script" uid="uid://clgvcwrykc7hg" path="res://scripts/funfact_show.gd" id="2_8cuoo"]
 [ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
 [ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
+[ext_resource type="StyleBox" uid="uid://c7wfhuh402aqx" path="res://assets/Styles/HUD_style.tres" id="2_rve7n"]
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
+[ext_resource type="AnimationLibrary" uid="uid://dqiviwmao54ul" path="res://assets/Animations/.res" id="4_meimr"]
 [ext_resource type="Texture2D" uid="uid://cpm5b577y0d6u" path="res://assets/dividers-png-rdcarstn8g3zb1qm-421228855.jpg" id="7_cf6ij"]
 [ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
 [ext_resource type="Texture2D" uid="uid://dvhder5psjgc4" path="res://assets/poubelle_modele_1.png" id="8_8cuoo"]
 [ext_resource type="Texture2D" uid="uid://chsayojk0kcp2" path="res://assets/poubelle_modele_3.png" id="9_cf6ij"]
 
-[sub_resource type="Animation" id="Animation_q1nc5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1920, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jvmy4"]
-resource_name = "slide_in_left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(-480, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_en2g2"]
-resource_name = "slide_in_right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(1920, 0), Vector2(1440, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_e4cfk"]
-resource_name = "slide_out_left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-480, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_67toa"]
-resource_name = "slide_out_right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(1440, 0), Vector2(1920, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jvmy4"]
-_data = {
-&"RESET": SubResource("Animation_q1nc5"),
-&"slide_in_left": SubResource("Animation_jvmy4"),
-&"slide_in_right": SubResource("Animation_en2g2"),
-&"slide_out_left": SubResource("Animation_e4cfk"),
-&"slide_out_right": SubResource("Animation_67toa")
-}
+[sub_resource type="LabelSettings" id="LabelSettings_ljw04"]
+line_spacing = -16.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cuoo"]
 
@@ -104,24 +25,23 @@ script = ExtResource("1_7dvtb")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.037037037
-metadata/_edit_use_anchors_ = true
-
-[node name="Text" type="RichTextLabel" parent="InfoPanel" unique_id=1174285561]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "FunFacts will scroll here"
-scroll_active = false
-autowrap_trim_flags = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_8cuoo")
-array_text = Array[String](["Hi, i am a fun fact", "Do you know that i like ice cream"])
+theme_override_styles/panel = ExtResource("2_rve7n")
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="InfoPanel" unique_id=1739003844]
 wait_time = 120.0
 autostart = true
+
+[node name="Text" type="Label" parent="InfoPanel" unique_id=156081302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Fun facts"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_8cuoo")
+array_text = Array[String](["J'aime la glace", "Ceci est un Fun Fact"])
 
 [node name="LeftMargin" type="MarginContainer" parent="." unique_id=193669928]
 anchors_preset = -1
@@ -135,10 +55,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LeftPanel" type="Panel" parent="LeftMargin" unique_id=887081378]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_rve7n")
 script = ExtResource("1_q1nc5")
 
 [node name="SlideAnimation" type="AnimationPlayer" parent="LeftMargin/LeftPanel" unique_id=295688850]
-libraries/ = SubResource("AnimationLibrary_jvmy4")
+libraries/ = ExtResource("4_meimr")
+autoplay = &"slide_out_left"
 
 [node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel" unique_id=535733085]
 process_callback = 0
@@ -150,11 +72,16 @@ anchor_left = 1.0
 anchor_top = 0.47000003
 anchor_right = 1.133
 anchor_bottom = 0.53000003
-offset_top = 0.39996338
+offset_top = -0.6000366
 offset_right = 0.15997314
-offset_bottom = -0.4000244
+offset_bottom = -1.4000244
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("2_rve7n")
+theme_override_styles/pressed = ExtResource("2_rve7n")
+theme_override_styles/hover = ExtResource("2_rve7n")
+theme_override_styles/disabled = ExtResource("2_rve7n")
+theme_override_styles/focus = ExtResource("2_rve7n")
 
 [node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel" unique_id=2141164923]
 layout_mode = 1
@@ -253,10 +180,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RightPanel" type="Panel" parent="RightMargin" unique_id=815910518]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_rve7n")
 script = ExtResource("2_jvmy4")
 
 [node name="SlideAnimation" type="AnimationPlayer" parent="RightMargin/RightPanel" unique_id=450091479]
-libraries/ = SubResource("AnimationLibrary_jvmy4")
+libraries/ = ExtResource("4_meimr")
+autoplay = &"slide_out_right"
 
 [node name="DisableTime" type="Timer" parent="RightMargin/RightPanel" unique_id=332542832]
 process_callback = 0
@@ -267,6 +196,11 @@ anchors_preset = -1
 anchor_left = -0.13333334
 anchor_top = 0.47037038
 anchor_bottom = 0.52962965
+theme_override_styles/normal = ExtResource("2_rve7n")
+theme_override_styles/pressed = ExtResource("2_rve7n")
+theme_override_styles/hover = ExtResource("2_rve7n")
+theme_override_styles/disabled = ExtResource("2_rve7n")
+theme_override_styles/focus = ExtResource("2_rve7n")
 metadata/_edit_use_anchors_ = true
 
 [node name="ScrollUpgrade" type="ScrollContainer" parent="RightMargin/RightPanel" unique_id=1957181153]
@@ -295,8 +229,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 20
-build_cost = 50.0
-build_output = 5.0
+build_cost = 50
+build_output = 5
 build_label = NodePath("BuildLabel1")
 build_name = "Sac poubelle"
 build_button = NodePath("BuildUpgradeButton1")
@@ -325,8 +259,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 1500
-build_cost = 5000.0
-build_output = 400.0
+build_cost = 5000
+build_output = 400
 build_label = NodePath("BuildLabel2")
 build_name = "Ecologiste"
 build_button = NodePath("BuildUpgradeButton2")
@@ -355,8 +289,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 350000
-build_cost = 1000000.0
-build_output = 80000.0
+build_cost = 1000000
+build_output = 80000
 build_label = NodePath("BuildLabel3")
 build_name = "Camion"
 build_button = NodePath("BuildUpgradeButton3")
@@ -386,8 +320,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 1500000000
-build_cost = 5000000000.0
-build_output = 400000000.0
+build_cost = 5000000000
+build_output = 400000000
 build_label = NodePath("BuildLabel4")
 build_name = "Robot"
 build_button = NodePath("BuildUpgradeButton4")
@@ -416,8 +350,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 100000000000000
-build_cost = 25000000000000.0
-build_output = 2000000000000.0
+build_cost = 25000000000000
+build_output = 2000000000000
 build_label = NodePath("BuildLabel5")
 build_name = "Robot"
 build_button = NodePath("BuildUpgradeButton5")
@@ -453,12 +387,14 @@ vertical_alignment = 1
 [node name="ManuelOutputLabel" type="Label" parent="RightMargin/RightPanel" unique_id=1056244921]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.020833334
 anchor_top = 0.08888889
-anchor_right = 1.0
+anchor_right = 0.9791667
 anchor_bottom = 0.125
 grow_horizontal = 2
 text = "Output Label
 "
+label_settings = SubResource("LabelSettings_ljw04")
 vertical_alignment = 1
 autowrap_trim_flags = 0
 uppercase = true
@@ -526,7 +462,6 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 
-[connection signal="timeout" from="InfoPanel/Timer" to="InfoPanel/Text" method="_on_timer_timeout"]
 [connection signal="timeout" from="LeftMargin/LeftPanel/DisableTime" to="LeftMargin/LeftPanel" method="_on_disable_time_timeout"]
 [connection signal="pressed" from="LeftMargin/LeftPanel/CloseButton" to="LeftMargin/LeftPanel" method="_on_button_pressed"]
 [connection signal="timeout" from="RightMargin/RightPanel/DisableTime" to="RightMargin/RightPanel" method="_on_disable_time_timeout"]
