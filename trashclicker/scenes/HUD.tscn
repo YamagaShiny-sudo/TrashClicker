@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
 [ext_resource type="Texture2D" uid="uid://dvhder5psjgc4" path="res://assets/poubelle_modele_1.png" id="8_8cuoo"]
 [ext_resource type="Texture2D" uid="uid://chsayojk0kcp2" path="res://assets/poubelle_modele_3.png" id="9_cf6ij"]
+[ext_resource type="AudioStream" uid="uid://cwc2bdllymrth" path="res://assets/trash_collect.wav" id="13_ljw04"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ljw04"]
 line_spacing = -16.0
@@ -37,6 +38,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Fun facts"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -353,7 +356,7 @@ passif_upgrade = 100000000000000
 build_cost = 25000000000000
 build_output = 2000000000000
 build_label = NodePath("BuildLabel5")
-build_name = "Robot"
+build_name = "Nettoyeur en profondeur"
 build_button = NodePath("BuildUpgradeButton5")
 
 [node name="BuildUpgradeButton5" type="TextureButton" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building5" unique_id=51735012]
@@ -419,6 +422,10 @@ texture_normal = ExtResource("8_8cuoo")
 texture_pressed = ExtResource("9_cf6ij")
 ignore_texture_size = true
 stretch_mode = 6
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Trash" unique_id=841273084]
+stream = ExtResource("13_ljw04")
+bus = &"SoundEffect"
 
 [node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1820173823]
 anchors_preset = -1

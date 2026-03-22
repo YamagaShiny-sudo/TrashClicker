@@ -10,16 +10,16 @@ func _ready() -> void:
 	update_text()
 
 
-
 #Updating the label
 func update_text() -> void:
 	score_label.text = "Trash collected: " + format(trash_score)
 	power_label.text = "Manual output: " + format(output)
 
 var output = 1
+@onready var click_sound: AudioStreamPlayer = $Trash/ClickSound
 func _main_button_pressed() -> void:
 	addScore(output)
-
+	click_sound.play()
 
 
 #Make the any number 1000 to 1k and etc
@@ -54,7 +54,7 @@ func auto_clicker() -> void:
 	auto_stop.start()
 #Press the main button
 func _on_auto_clicker_timer_timeout() -> void:
-	_main_button_pressed()
+	addScore(output)
 #Stop the AutoClicker
 func _on_auto_stop_timeout() -> void:
 	auto_clicker_timer.stop()
