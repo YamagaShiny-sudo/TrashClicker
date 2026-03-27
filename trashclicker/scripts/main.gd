@@ -7,6 +7,10 @@ var trash_score : float = 0
 
 #Initialising at the start
 func _ready() -> void:
+	if OS.has_feature("web"):
+		var saved = JavaScriptBridge.eval("localStorage.getItem('trash_score')")
+		if saved != null:
+			trash_score = float(saved)
 	update_text()
 
 
@@ -79,7 +83,11 @@ func _on_speed_building_stop_timeout() -> void:
 func addScore(amount:float) -> void:
 	trash_score += amount
 	update_text()
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("localStorage.setItem('trash_score', '" + str(trash_score) + "')")
 #Substracting from the score
 func subScore(amount:float) -> void:
 	trash_score -= amount
 	update_text()
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("localStorage.setItem('trash_score', '" + str(trash_score) + "')")
