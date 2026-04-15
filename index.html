@@ -6,12 +6,24 @@
     <title>Achievements - Animaux sous-marins</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-rendering: optimizeLegibility;
+        }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #001219;
             background-image: url("images/background.png");
-            background-size: contain;
+            background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+
+            color : #e9d8a6;
+            display : block;
+            image-rendering: pixelated;
         }
         /* Flèche qui apparaît au bord */
         .arrow {
@@ -35,12 +47,29 @@
             top: 0;
             bottom: 0;
             width: 300px;
-            background: rgba(0,0,0,0.9);
+            background-color : #005f73;
+            border-right : 6px solid #0a9396;
+            display : flex;
+            flex-direction: column;
             color: white;
             padding: 20px;
             transform: translateX(-100%); /* caché à gauche */
             transition: transform 0.3s ease;
             z-index: 999;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #94d2bd;
+
+
+
+            text-shadow: 
+            2px 0 #000, -2px 0 #000, 
+            0 2px #000, 0 -2px #000,
+            2px 2px #000, -2px -2px #000,
+            2px -2px #000, -2px 2px #000;
         }
         .sidebar.right {
             right: 0;
@@ -51,23 +80,38 @@
 
         .sidebar button {
             display: block;
-            width: 100%;
-            margin: 15px 0;
-            padding: 10px;
-            font-size: 16px;
+            font-family: 'Press Start 2P', cursive;
+
+            font-size: 12px;
+
+            padding: 18px;
+
+            margin: 10px 0;
+
+            text-transform: uppercase;
+
+            text-align: center;
+
             cursor: pointer;
-            background: #444;
-            border: none;
-            color: white;
-            border-radius: 5px;
+
+            background-color: transparent;
+
+            color: #e9d8a6;
+
+            border: 4px solid transparent;
+
+            transition: all 0.2s;
         }
         .sidebar button:hover {
-            background: #666;
+            background-color: #0a9396;
+            border: 4px solid #ee9b00;
         }
 
 
         /* Contenu des onglets */
         .tab-content {
+            width: 100%;
+            height: 100vh;
             display: none;
             padding-top: 50px;
             min-height: calc(100vh - 50px);
@@ -82,7 +126,6 @@
         .species {
             position: absolute;
             cursor: pointer;
-            transition: top 5s ease, left 5s ease;
         }
 
         .species img {
@@ -184,7 +227,7 @@
             position: relative;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
         }
         #game iframe {
@@ -194,7 +237,7 @@
         }       
         #achievements {
             position: relative;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             overflow: hidden;
         }
@@ -443,6 +486,7 @@
 
     let score = 0;
     let previousScore = -1;
+    let animations = [];
 
     function updateScore() {
         const saved = localStorage.getItem('trash_score');
@@ -451,45 +495,57 @@
             score = parseFloat(saved);
         }
 
-        // Only update if score changed
         if (score !== previousScore) {
             previousScore = score;
+
+            // stop animations properly
+            animations.forEach(id => cancelAnimationFrame(id));
+            animations = [];
+
             createFloatingSpecies();
         }
     }
-
     function getNonOverlappingPosition(existing, size = 150, maxTries = 50) {
+
+        const container = document.getElementById("achievements");
+
         for (let i = 0; i < maxTries; i++) {
-            const x = Math.random() * (window.innerWidth - size);
-            const y = Math.random() * (window.innerHeight - size);
+
+            const x = Math.random() * (container.clientWidth - size);
+            const y = Math.random() * (container.clientHeight - size);
 
             let overlap = false;
+
             for (const pos of existing) {
+
                 const rect = pos.getBoundingClientRect();
-                
+
                 if (
                     x < rect.right &&
                     x + size > rect.left &&
                     y < rect.bottom &&
                     y + size > rect.top
-                ){
-                    overlap =True;
+                ) {
+                    overlap = true;
                     break;
                 }
+            }
 
             if (!overlap) {
                 return { x, y };
             }
         }
 
-        // Si on n’a pas trouvé de position non chevauchante après maxTries, retourner une position aléatoire
         return {
-            x: Math.random() * (window.innerWidth - size),
-            y: Math.random() * (window.innerHeight - size)
+            x: Math.random() * (container.clientWidth - size),
+            y: Math.random() * (container.clientHeight - size)
         };
-    }}
+    }
 
     function createFloatingSpecies() {
+
+        animations.forEach(id => cancelAnimationFrame(id));
+        animations = [];
         const container = document.getElementById("achievements");
         container.innerHTML = "";
 
@@ -522,8 +578,10 @@
             // Position initiale sans chevauchement
             const existing = container.querySelectorAll(".species");
             const position = getNonOverlappingPosition(existing);
-            div.style.top = position.y + "px";
-            div.style.left = position.x + "px";
+            div.dataset.x = position.x;
+            div.dataset.y = position.y;
+
+            div.style.transform = `translate(${position.x}px, ${position.y}px)`;
 
             container.appendChild(div);
             swim(div);
@@ -532,35 +590,48 @@
     }
 
     function swim(element) {
+
+        const container = document.getElementById("achievements");
         const size = 150;
-        let speed = 0.4 + Math.random() *0.6; // Vitesse entre 0.3 et 1
+
+        let speed = 0.6 + Math.random() * 0.6;
         let direction = Math.random() < 0.5 ? -1 : 1;
 
+        let animationId;
+
         function move() {
-            let x = parseFloat(element.style.left);
-            let y = parseFloat(element.style.top);
+
+            let x = parseFloat(element.dataset.x);
+            let y = parseFloat(element.dataset.y);
 
             x += speed * direction;
 
-            if (direction === 1 && x > window.innerWidth + size) {
+            const containerWidth = container.clientWidth;
+
+            if (direction === 1 && x > containerWidth) {
                 x = -size;
-            } else if (direction === -1 && x < -size) {
-                x = window.innerWidth + size;
+            } 
+            else if (direction === -1 && x < -size) {
+                x = containerWidth;
             }
 
-            element.style.left = x + "px";
-            element.style.top = y + "px";
+            element.dataset.x = x;
+            element.dataset.y = y;
 
+            element.style.transform =
+                `translate(${x}px, ${y}px)`;
 
-            requestAnimationFrame(move);
+            animationId = requestAnimationFrame(move);
         }
 
-        move();
+        animationId = requestAnimationFrame(move);
+
+        animations.push(animationId);
     }
     createFloatingSpecies();
 
     // Update score periodically
-    setInterval(updateScore, 2000);
+    setInterval(updateScore, 5000);
 
     const contents = document.querySelectorAll(".tab-content");
 
