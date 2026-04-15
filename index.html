@@ -157,9 +157,6 @@
             transition: opacity 0.3s ease;
         }
 
-        .species:hover .tooltip {
-            opacity: 1;
-        }
 
         /* --- POPUP --- */
         .popup {
@@ -185,7 +182,8 @@
 
         .popup-content {
             color: #ffffff; 
-            text-shadow: 0 0 8px cyan;
+            font-family: Arial, sans-serif;
+            /* text-shadow: 0 0 8px cyan; */
             width: 420px;
             padding: 25px;
             border-radius: 20px;
@@ -566,9 +564,7 @@
             if (unlocked) {
                 const tooltip = document.createElement("div");
                 tooltip.classList.add("tooltip");
-                tooltip.textContent = species.intro;
                 div.appendChild(tooltip);
-
                 div.addEventListener("click", () => {
                     openPopup(species);
                 });
@@ -576,15 +572,20 @@
             }
 
             // Position initiale sans chevauchement
-            const existing = container.querySelectorAll(".species");
-            const position = getNonOverlappingPosition(existing);
-            div.dataset.x = position.x;
-            div.dataset.y = position.y;
+            // Add first so it exists in DOM
+        container.appendChild(div);
 
-            div.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        const existing = container.querySelectorAll(".species");
+        const position = getNonOverlappingPosition(existing);
 
-            container.appendChild(div);
-            swim(div);
+        div.dataset.x = position.x;
+        div.dataset.y = position.y;
+
+        // Apply position
+        div.style.transform =
+            `translate(${position.x}px, ${position.y}px)`;
+
+        swim(div);
 
         });
     }
@@ -631,7 +632,7 @@
     createFloatingSpecies();
 
     // Update score periodically
-    setInterval(updateScore, 5000);
+    setInterval(updateScore, 2000);
 
     const contents = document.querySelectorAll(".tab-content");
 
