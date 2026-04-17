@@ -246,7 +246,7 @@
 
     <!-- Flèches -->
     <div class="arrow left">&#9654;</div>
-    <div class="arrow right">&#9664;</div>
+
 
     <!-- Sidebar gauche -->
     <div class="sidebar left" id="sidebarLeft">
@@ -503,42 +503,6 @@
             createFloatingSpecies();
         }
     }
-    function getNonOverlappingPosition(existing, size = 150, maxTries = 50) {
-
-        const container = document.getElementById("achievements");
-
-        for (let i = 0; i < maxTries; i++) {
-
-            const x = Math.random() * (container.clientWidth - size);
-            const y = Math.random() * (container.clientHeight - size);
-
-            let overlap = false;
-
-            for (const pos of existing) {
-
-                const rect = pos.getBoundingClientRect();
-
-                if (
-                    x < rect.right &&
-                    x + size > rect.left &&
-                    y < rect.bottom &&
-                    y + size > rect.top
-                ) {
-                    overlap = true;
-                    break;
-                }
-            }
-
-            if (!overlap) {
-                return { x, y };
-            }
-        }
-
-        return {
-            x: Math.random() * (container.clientWidth - size),
-            y: Math.random() * (container.clientHeight - size)
-        };
-    }
 
     function createFloatingSpecies() {
 
@@ -575,15 +539,15 @@
             // Add first so it exists in DOM
         container.appendChild(div);
 
-        const existing = container.querySelectorAll(".species");
-        const position = getNonOverlappingPosition(existing);
+        const x = Math.random() * container.clientWidth;
+        const y = Math.random() * container.clientHeight;
 
-        div.dataset.x = position.x;
-        div.dataset.y = position.y;
+        div.dataset.x = x;
+        div.dataset.y = y;
 
         // Apply position
         div.style.transform =
-            `translate(${position.x}px, ${position.y}px)`;
+            `translate(${x}px, ${y}px)`;
 
         swim(div);
 
