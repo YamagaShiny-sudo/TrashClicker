@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://dcs5cx6tebe2f"]
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
-[ext_resource type="Script" uid="uid://fcpump45ktp" path="res://scripts/left_panel_anim.gd" id="1_q1nc5"]
 [ext_resource type="Script" uid="uid://clgvcwrykc7hg" path="res://scripts/funfact_show.gd" id="2_8cuoo"]
 [ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
-[ext_resource type="Texture2D" uid="uid://djde8nkg1chdm" path="res://assets/cat.webp" id="2_mwyjx"]
 [ext_resource type="StyleBox" uid="uid://c7wfhuh402aqx" path="res://assets/Styles/HUD_style.tres" id="2_rve7n"]
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
 [ext_resource type="AnimationLibrary" uid="uid://dqiviwmao54ul" path="res://assets/Animations/.res" id="4_meimr"]
@@ -45,130 +43,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_8cuoo")
 array_text = Array[String](["J'aime la glace", "Ceci est un Fun Fact"])
-
-[node name="LeftMargin" type="MarginContainer" parent="." unique_id=193669928]
-anchors_preset = -1
-anchor_right = 0.25
-anchor_bottom = 1.0
-offset_left = 1920.0
-offset_right = 1920.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="LeftPanel" type="Panel" parent="LeftMargin" unique_id=887081378]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("2_rve7n")
-script = ExtResource("1_q1nc5")
-
-[node name="SlideAnimation" type="AnimationPlayer" parent="LeftMargin/LeftPanel" unique_id=295688850]
-libraries/ = ExtResource("4_meimr")
-autoplay = &"slide_out_left"
-
-[node name="DisableTime" type="Timer" parent="LeftMargin/LeftPanel" unique_id=535733085]
-process_callback = 0
-
-[node name="CloseButton" type="Button" parent="LeftMargin/LeftPanel" unique_id=1985162969]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.47000003
-anchor_right = 1.133
-anchor_bottom = 0.53000003
-offset_top = -0.6000366
-offset_right = 0.15997314
-offset_bottom = -1.4000244
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = ExtResource("2_rve7n")
-theme_override_styles/pressed = ExtResource("2_rve7n")
-theme_override_styles/hover = ExtResource("2_rve7n")
-theme_override_styles/disabled = ExtResource("2_rve7n")
-theme_override_styles/focus = ExtResource("2_rve7n")
-
-[node name="Settings" type="VBoxContainer" parent="LeftMargin/LeftPanel" unique_id=2141164923]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.25
-anchor_right = 1.0
-anchor_bottom = 0.5
-size_flags_horizontal = 3
-theme_override_constants/separation = 50
-
-[node name="Screen 1" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings" unique_id=176453853]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 1" unique_id=173148978]
-layout_mode = 2
-texture_normal = ExtResource("2_mwyjx")
-texture_pressed = ExtResource("3_bm2gq")
-ignore_texture_size = true
-stretch_mode = 6
-
-[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 1" unique_id=82934993]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Screen 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Screen 2" type="PanelContainer" parent="LeftMargin/LeftPanel/Settings" unique_id=1287283486]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PowerUpgradeButton" type="TextureButton" parent="LeftMargin/LeftPanel/Settings/Screen 2" unique_id=274890069]
-layout_mode = 2
-texture_normal = ExtResource("2_mwyjx")
-texture_pressed = ExtResource("3_bm2gq")
-ignore_texture_size = true
-stretch_mode = 6
-
-[node name="PowerLabel" type="Label" parent="LeftMargin/LeftPanel/Settings/Screen 2" unique_id=1461710198]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Screen 2"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-metadata/_edit_use_anchors_ = true
-
-[node name="SettingsLabel" type="Label" parent="LeftMargin/LeftPanel" unique_id=1310078360]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.125
-grow_horizontal = 2
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WIPMusicBar" type="Label" parent="LeftMargin/LeftPanel" unique_id=1204651226]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.7175926
-anchor_right = 1.0
-anchor_bottom = 0.8425926
-grow_horizontal = 2
-text = "WIP SoundEffectControlBar"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WIPSoundEffectBar" type="Label" parent="LeftMargin/LeftPanel" unique_id=776560708]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5462963
-anchor_right = 1.0
-anchor_bottom = 0.6712963
-grow_horizontal = 2
-text = "WIP MusicControlBar"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="RightMargin" type="MarginContainer" parent="." unique_id=76391960]
 anchors_preset = -1
@@ -438,6 +312,7 @@ offset_top = -0.3600006
 offset_right = -0.8000488
 offset_bottom = -0.3199997
 pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Score"
 fit_content = true
 scroll_active = false
@@ -469,8 +344,6 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 
-[connection signal="timeout" from="LeftMargin/LeftPanel/DisableTime" to="LeftMargin/LeftPanel" method="_on_disable_time_timeout"]
-[connection signal="pressed" from="LeftMargin/LeftPanel/CloseButton" to="LeftMargin/LeftPanel" method="_on_button_pressed"]
 [connection signal="timeout" from="RightMargin/RightPanel/DisableTime" to="RightMargin/RightPanel" method="_on_disable_time_timeout"]
 [connection signal="pressed" from="RightMargin/RightPanel/CloseButton" to="RightMargin/RightPanel" method="_on_button_pressed"]
 [connection signal="pressed" from="Trash/TrashButton" to="." method="_main_button_pressed"]

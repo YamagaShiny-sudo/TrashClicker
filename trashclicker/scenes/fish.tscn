@@ -1,16 +1,37 @@
 [gd_scene format=3 uid="uid://35625lcu2c8p"]
 
 [ext_resource type="Script" uid="uid://ce3ldyt0pvm3c" path="res://scripts/fish.gd" id="1_8g0i4"]
-[ext_resource type="Texture2D" uid="uid://b0rdym4vr1es1" path="res://assets/pngtree-golden-brown-crispy-fried-fish-stick-for-delicious-meals-png-image_15775355-1462487145-1.png" id="2_8g0i4"]
+[ext_resource type="Texture2D" uid="uid://qdnku1n1a7d8" path="res://assets/Animaux/atka_maquereau.png" id="2_nub35"]
+[ext_resource type="Texture2D" uid="uid://btsqu80fqp4l7" path="res://assets/Animaux/clownfish.png" id="3_pgks6"]
+[ext_resource type="Texture2D" uid="uid://ihmepkc4do6e" path="res://assets/Animaux/blue_ringed_octapus.png" id="3_yixxi"]
+[ext_resource type="Texture2D" uid="uid://d25pa6ul87mmv" path="res://assets/Animaux/dolphin.png" id="5_wjndy"]
+[ext_resource type="Texture2D" uid="uid://dadg3itled2pk" path="res://assets/Animaux/griset.png" id="6_4lajf"]
+[ext_resource type="Texture2D" uid="uid://cg2kct3vrnru8" path="res://assets/Animaux/Gulper_Eel.png" id="7_k5b65"]
+[ext_resource type="Texture2D" uid="uid://cplg6kcborh4a" path="res://assets/Animaux/jellyfish.png" id="8_3ekal"]
+[ext_resource type="Texture2D" uid="uid://bc7aya51n06tf" path="res://assets/Animaux/lacon.png" id="9_og10o"]
+[ext_resource type="Texture2D" uid="uid://d2nby5y3u02ab" path="res://assets/Animaux/loquette.png" id="10_1h2xk"]
+[ext_resource type="Texture2D" uid="uid://cy16jpbol6d5n" path="res://assets/Animaux/maquereau_espagnol.png" id="11_yul4c"]
+[ext_resource type="Texture2D" uid="uid://c54l8chdopq0t" path="res://assets/Animaux/merlu.png" id="12_epktj"]
+[ext_resource type="Texture2D" uid="uid://dul8rt565bu80" path="res://assets/Animaux/narwhale.png" id="13_enxas"]
+[ext_resource type="Texture2D" uid="uid://bfwg0sywruh3v" path="res://assets/Animaux/oarfish.png" id="14_7ocb7"]
+[ext_resource type="Texture2D" uid="uid://7hdhv4hpup53" path="res://assets/Animaux/octupus.png" id="15_5gnq5"]
+[ext_resource type="Texture2D" uid="uid://x7y27aj3b1k0" path="res://assets/Animaux/poisson_ballon.png" id="16_tjd68"]
+[ext_resource type="Texture2D" uid="uid://ylpwn328oram" path="res://assets/Animaux/poisson_lune_rouge.png" id="17_cphpq"]
+[ext_resource type="Texture2D" uid="uid://bmp7nadbsaeqq" path="res://assets/Animaux/seahorse.png" id="18_w6hvo"]
+[ext_resource type="Texture2D" uid="uid://cid0ewba3t8d4" path="res://assets/Animaux/seriole_japonaise.png" id="19_pcw41"]
+[ext_resource type="Texture2D" uid="uid://shrrhp0pjdxa" path="res://assets/Animaux/tuna.png" id="20_2q8ba"]
+[ext_resource type="Texture2D" uid="uid://bdnvfnljyic1a" path="res://assets/Animaux/turtle.png" id="21_spomy"]
+[ext_resource type="Texture2D" uid="uid://birj1lcl6dkwc" path="res://assets/Animaux/whale.png" id="22_djbdq"]
 
 [node name="Fish" type="Node2D" unique_id=1929987339]
 script = ExtResource("1_8g0i4")
+animauxSprite = [ExtResource("2_nub35"), ExtResource("3_yixxi"), ExtResource("3_pgks6"), ExtResource("5_wjndy"), ExtResource("6_4lajf"), ExtResource("7_k5b65"), ExtResource("8_3ekal"), ExtResource("9_og10o"), ExtResource("10_1h2xk"), ExtResource("11_yul4c"), ExtResource("12_epktj"), ExtResource("13_enxas"), ExtResource("14_7ocb7"), ExtResource("15_5gnq5"), ExtResource("16_tjd68"), ExtResource("17_cphpq"), ExtResource("18_w6hvo"), ExtResource("19_pcw41"), ExtResource("20_2q8ba"), ExtResource("21_spomy"), ExtResource("22_djbdq")]
 
 [node name="DetectButton" type="Button" parent="." unique_id=628491774]
 offset_right = 1000.0
 offset_bottom = 1000.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("2_8g0i4")
+icon = ExtResource("3_pgks6")
 flat = true
 icon_alignment = 1
 expand_icon = true

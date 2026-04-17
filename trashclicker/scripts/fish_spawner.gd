@@ -15,6 +15,7 @@ func spawn(body : StaticBody2D) -> void:
 	obj.position.y = randf_range(line.shape.get_a().y, line.shape.get_b().y)
 	if body == left_spawner:
 		obj.side = -1
+		obj.scale.x *=-1
 	add_child(obj)
 
 @onready var right_spawner: StaticBody2D = $RightSpawner
