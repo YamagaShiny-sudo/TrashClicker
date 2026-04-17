@@ -1,6 +1,6 @@
 extends Node
 
-var randomTimeSpawn : Array[int] = [1, 2]
+var randomTimeSpawn : Array[int] = [30, 60]
 var spawnObject = preload("res://scenes/fish.tscn")
 
 @onready var spawn_timer: Timer = $SpawnTimer
