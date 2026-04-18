@@ -25,6 +25,7 @@
             display : block;
             image-rendering: pixelated;
         }
+
         /* Flèche qui apparaît au bord */
         .arrow {
             position: fixed;
@@ -46,7 +47,7 @@
             position: fixed;
             top: 0;
             bottom: 0;
-            width: 300px;
+            width: 400px;
             background-color : #005f73;
             border-right : 6px solid #0a9396;
             display : flex;
@@ -113,8 +114,7 @@
             width: 100%;
             height: 100vh;
             display: none;
-            padding-top: 50px;
-            min-height: calc(100vh - 50px);
+            overflow: hidden;
             background: transparent;
 
         }
@@ -222,9 +222,6 @@
             text-shadow: 0 0 10px cyan;
         }
         #game {
-            position: relative;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100vh;
         }
@@ -238,6 +235,10 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            background-image: url("images/background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
     </style>
@@ -251,9 +252,11 @@
     <!-- Sidebar gauche -->
     <div class="sidebar left" id="sidebarLeft">
         <h2>Menu</h2>
-        <button onclick="switchTab('game')">Revenir au jeu</button>
+        <button onclick="switchTab('game')">Jeu</button>
         <button onclick="switchTab('achievements')">Achievements</button>
-        <button onclick="goSettings()">Settings</button>
+        <button onclick="switchTab('funfacts')">
+            Fun Facts
+        </button>
         <button onclick="quitGame()">Quitter</button>
     </div>
 
@@ -293,6 +296,20 @@
 
     <!-- Contenu Achievements -->
     <div id="achievements" class="tab-content">
+    </div>
+
+    
+    <!-- Contenu Fun Facts -->
+    <div id="funfacts" class="tab-content">
+        <iframe 
+            src="funfact/Cookie_Clicker_FunFacts.html"
+            style="
+                width:100%;
+                height:100%;
+                border:none;
+                display:block;
+            ">
+        </iframe>
     </div>
 
 <script>
@@ -539,8 +556,14 @@
             // Add first so it exists in DOM
         container.appendChild(div);
 
-        const x = Math.random() * container.clientWidth;
-        const y = Math.random() * container.clientHeight;
+        const containerWidth =
+            container.clientWidth || window.innerWidth;
+
+        const containerHeight =
+            container.clientHeight || window.innerHeight;
+
+        const x = Math.random() * (containerWidth - 150);
+        const y = Math.random() * (containerHeight - 150);
 
         div.dataset.x = x;
         div.dataset.y = y;
@@ -602,32 +625,42 @@
 
     // Fonction pour changer de contenu
     function switchTab(tabId) {
-            contents.forEach(c => c.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
 
-            document.getElementById(tabId).classList.add("active");
+        const selected = document.getElementById(tabId);
+        selected.classList.add("active");
 
-            const gameFrame = document.querySelector("#game iframe");
+        const gameFrame = document.querySelector("#game iframe");
 
-            if (tabId === "game") {
-                gameFrame.style.pointerEvents = "auto";
-            } else {
-                gameFrame.style.pointerEvents = "none";
-            }
+        if (tabId === "game") {
+            gameFrame.style.pointerEvents = "auto";
+        } else {
+            gameFrame.style.pointerEvents = "none";
         }
+
+        if (tabId === "achievements") {
+
+            // Wait one frame so layout updates
+            requestAnimationFrame(() => {
+                createFloatingSpecies();
+            });
+
+        }
+    }
 
     // Flèches et sidebars
     const arrowLeft = document.querySelector('.arrow.left');
     const arrowRight = document.querySelector('.arrow.right');
     const sidebarLeft = document.getElementById('sidebarLeft');
-    const sidebarRight = document.getElementById('sidebarRight');
+    // const sidebarRight = document.getElementById('sidebarRight');
 
     document.addEventListener('mousemove', e => {
         if (!sidebarLeft.classList.contains('open')) {
             arrowLeft.style.opacity = (e.clientX < 30) ? 1 : 0;
         }
-        if (!sidebarRight.classList.contains('open')) {
-            arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
-        }
+        // if (!sidebarRight.classList.contains('open')) {
+        //     arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
+        // }
     });
 
     arrowLeft.addEventListener('click', () => {
@@ -643,18 +676,18 @@
         }
     });
 
-    arrowRight.addEventListener('click', () => {
-        sidebarRight.classList.toggle('open');
-        if (sidebarRight.classList.contains('open')) {
-            arrowRight.innerHTML = '&#9654;';
-            arrowRight.style.right = "250px";
-            arrowRight.style.opacity = 1;
-        } else {
-            arrowRight.innerHTML = '&#9664;';
-            arrowRight.style.right = "0";
-            arrowRight.style.opacity = 0;
-        }
-    });
+    // arrowRight.addEventListener('click', () => {
+    //     sidebarRight.classList.toggle('open');
+    //     if (sidebarRight.classList.contains('open')) {
+    //         arrowRight.innerHTML = '&#9654;';
+    //         arrowRight.style.right = "250px";
+    //         arrowRight.style.opacity = 1;
+    //     } else {
+    //         arrowRight.innerHTML = '&#9664;';
+    //         arrowRight.style.right = "0";
+    //         arrowRight.style.opacity = 0;
+    //     }
+    // });
 
     // Fonctions boutons
     function goSettings() { alert("Ouvrir les paramètres !"); }
