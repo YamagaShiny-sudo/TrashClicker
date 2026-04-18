@@ -253,10 +253,13 @@
     <div class="sidebar left" id="sidebarLeft">
         <h2>Menu</h2>
         <button onclick="switchTab('game')">Jeu</button>
-        <button onclick="switchTab('achievements')">Achievements</button>
+        <button onclick="switchTab('achievements')">Répertoire des poissons</button>
         <button onclick="switchTab('funfacts')">
             Fun Facts
         </button>
+        <!-- <button onclick="resetScore()">
+            Reset Score
+        </button> -->
         <button onclick="quitGame()">Quitter</button>
     </div>
 
@@ -619,7 +622,7 @@
     createFloatingSpecies();
 
     // Update score periodically
-    setInterval(updateScore, 2000);
+    setInterval(updateScore, 10000);
 
     const contents = document.querySelectorAll(".tab-content");
 
@@ -690,8 +693,18 @@
     // });
 
     // Fonctions boutons
-    function goSettings() { alert("Ouvrir les paramètres !"); }
     function quitGame() { alert("Quitter le jeu !"); }
+    function resetScore() {
+
+        localStorage.removeItem('trash_score');
+
+        score = 0;
+        previousScore = -1;
+
+        createFloatingSpecies();
+
+        console.log("Score reset");
+    }
 
     // --- POPUP SYSTEM ---
     const popup = document.getElementById("popup");
