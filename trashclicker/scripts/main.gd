@@ -16,8 +16,8 @@ func _ready() -> void:
 
 #Updating the label
 func update_text() -> void:
-	score_label.text = "Trash collected: " + format(trash_score)
-	power_label.text = "Manual output: " + format(output)
+	score_label.text = "Poubelles collectées: " + format(trash_score)
+	power_label.text = "Poubelles/click: " + format(output)
 
 var output = 1
 @onready var click_sound: AudioStreamPlayer = $Trash/ClickSound

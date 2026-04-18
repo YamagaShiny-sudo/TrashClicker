@@ -44,7 +44,7 @@ text = "Fun facts"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_8cuoo")
-array_text = Array[String](["J'aime la glace", "Ceci est un Fun Fact"])
+array_text = Array[String](["Les poulpes sont capables d'utiliser des outils, de résoudre des problèmes complexes et même de s'échapper de leurs aquariums.", "Certains poissons vivant dans les profondeurs abyssales et peuvent produire leur propre lumière. D'autres encore sont gigantesques !", "Plus de la moitié de l'oxygène que nous respirons ne provient pas des arbres, mais du phytoplancton marin.", "Chaque requin-baleine possède un motif de taches unique sur sa peau. De quoi en faire une collection !", "Les récifs coralliens abritent une biodiversité si riche qu'ils sont considérés comme les \"pharmacies de la mer\".", "94 % des espèces vivantes se trouvent dans l’océan !", "Les chants des baleines à bosse peuvent voyager sur des milliers de kilomètres à travers l'océan.", "La plupart des volcans actifs de la Terre se trouvent sous l’eau.", "À 10 000 mètres de profondeur, la pression est plus de 1 000 fois supérieure à celle ressentie à la surface.", "Le requin du Groenland est le vertébré qui vit le plus longtemps sur Terre. Il peut atteindre l'âge de 400 ans !"])
 
 [node name="RightMargin" type="MarginContainer" parent="." unique_id=76391960]
 anchors_preset = -1
