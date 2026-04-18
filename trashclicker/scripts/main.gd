@@ -9,8 +9,6 @@ var trash_score : float = 0
 func _ready() -> void:
 	if OS.has_feature("web"):
 		var saved = JavaScriptBridge.eval("localStorage.getItem('trash_score')")
-		if saved != null:
-			trash_score = float(saved)
 	update_text()
 
 
