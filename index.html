@@ -25,6 +25,7 @@
             display : block;
             image-rendering: pixelated;
         }
+
         /* Flèche qui apparaît au bord */
         .arrow {
             position: fixed;
@@ -46,7 +47,7 @@
             position: fixed;
             top: 0;
             bottom: 0;
-            width: 300px;
+            width: 400px;
             background-color : #005f73;
             border-right : 6px solid #0a9396;
             display : flex;
@@ -113,8 +114,7 @@
             width: 100%;
             height: 100vh;
             display: none;
-            padding-top: 50px;
-            min-height: calc(100vh - 50px);
+            overflow: hidden;
             background: transparent;
 
         }
@@ -222,9 +222,6 @@
             text-shadow: 0 0 10px cyan;
         }
         #game {
-            position: relative;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100vh;
         }
@@ -238,6 +235,10 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            background-image: url("images/background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
     </style>
@@ -246,14 +247,16 @@
 
     <!-- Flèches -->
     <div class="arrow left">&#9654;</div>
-    <div class="arrow right">&#9664;</div>
+
 
     <!-- Sidebar gauche -->
     <div class="sidebar left" id="sidebarLeft">
         <h2>Menu</h2>
-        <button onclick="switchTab('game')">Revenir au jeu</button>
+        <button onclick="switchTab('game')">Jeu</button>
         <button onclick="switchTab('achievements')">Achievements</button>
-        <button onclick="goSettings()">Settings</button>
+        <button onclick="switchTab('funfacts')">
+            Fun Facts
+        </button>
         <button onclick="quitGame()">Quitter</button>
     </div>
 
@@ -295,6 +298,20 @@
     <div id="achievements" class="tab-content">
     </div>
 
+    
+    <!-- Contenu Fun Facts -->
+    <div id="funfacts" class="tab-content">
+        <iframe 
+            src="funfact/Cookie_Clicker_FunFacts.html"
+            style="
+                width:100%;
+                height:100%;
+                border:none;
+                display:block;
+            ">
+        </iframe>
+    </div>
+
 <script>
     // Données espèces
     const speciesData = [
@@ -303,49 +320,49 @@
         name: "Pieuvre aux anneaux bleus", 
         img: "images/blue_ringed_octapus.png", 
         intro: "Petite pieuvre très venimeuse. Ses anneaux bleus brillent pour prévenir du danger.", 
-        unlockedAt: 5 
+        unlockedAt: 1000 
     },
     { 
         name: "Anguille pélican", 
         img: "images/Gulper_Eel.png", 
         intro: "Poisson des grandes profondeurs avec une énorme bouche pour avaler ses proies.", 
-        unlockedAt: 5 
+        unlockedAt: 800 
     },
     { 
         name: "Méduse", 
         img: "images/jellyfish.png", 
         intro: "Animal gélatineux qui flotte dans l’eau. Certaines peuvent piquer.", 
-        unlockedAt: 5 
+        unlockedAt: 20 
     },
     { 
         name: "Narval", 
         img: "images/narwhale.png", 
         intro: "Baleine de l’Arctique avec une longue dent en forme de corne.", 
-        unlockedAt: 5 
+        unlockedAt: 600 
     },
     { 
         name: "Hippocampe", 
         img: "images/seahorse.png", 
         intro: "Petit poisson qui nage debout. Le mâle porte les œufs.", 
-        unlockedAt: 5 
+        unlockedAt: 80 
     },
     { 
         name: "Requin", 
         img: "images/shark.png", 
         intro: "Grand prédateur marin avec beaucoup de dents. Important pour l’océan.", 
-        unlockedAt: 5 
+        unlockedAt: 250 
     },
     { 
         name: "Poisson-lune", 
         img: "images/sunfish.png", 
         intro: "Très gros poisson rond. Il mange surtout des méduses.", 
-        unlockedAt: 5 
+        unlockedAt: 350 
     },
     { 
         name: "Thon", 
         img: "images/tuna.png", 
         intro: "Poisson rapide qui parcourt de longues distances.", 
-        unlockedAt: 5 
+        unlockedAt: 120 
     },
     { 
         name: "Baleine", 
@@ -357,13 +374,13 @@
         name: "Étoile de mer", 
         img: "images/starfish.png", 
         intro: "Animal marin à cinq bras. Peut faire repousser un bras perdu.", 
-        unlockedAt: 5 
+        unlockedAt: 25 
     },
     { 
         name: "Poisson-clown", 
         img: "images/clownfish.png", 
         intro: "Petit poisson orange qui vit avec les anémones.", 
-        unlockedAt: 5 
+        unlockedAt: 30 
     },
     { 
         name: "Tortue marine", 
@@ -375,7 +392,7 @@
         name: "Déchet", 
         img: "images/trash.png", 
         intro: "Objet jeté dans la mer, dangereux pour les animaux.", 
-        unlockedAt: 5 
+        unlockedAt: 10 
     },
     { 
         name: "Déchet plastique", 
@@ -387,13 +404,13 @@
         name: "Adrien", 
         img: "images/adrien.png", 
         intro: "Étudiant à Lyon 2.", 
-        unlockedAt: 5 
+        unlockedAt: 100 
     },
     { 
         name: "Filet de pêche abandonné", 
         img: "images/ghost_net.png", 
         intro: "Filet de pêche oublié qui peut piéger les poissons et tortues.", 
-        unlockedAt: 5 
+        unlockedAt: 1015 
     },
     { 
         name: "Déchet métallique", 
@@ -405,19 +422,19 @@
     name: "Liquide dangereux", 
     img: "images/hazardous_liquid.png", 
     intro: "Liquides chimiques ou polluants qui peuvent tuer les animaux et contaminer l’eau.", 
-    unlockedAt: 5 
+    unlockedAt: 300 
     },
     { 
     name: "Trésor en or", 
     img: "images/gold.png", 
     intro: "Lingots en or perdus dans la mer, précieux et rares.", 
-    unlockedAt: 5 
+    unlockedAt: 1200 
     },
     { 
     name: "Trésor", 
     img: "images/tresure.png", 
     intro: "???", 
-    unlockedAt: 5 
+    unlockedAt: 1300 
     },
     { 
       name: "Atka maquereau", 
@@ -429,55 +446,55 @@
       name: "Griset", 
       img: "images/griset.png", 
       intro: "petit poisson marin argenté, souvent présent en bancs près des côtes.", 
-      unlockedAt: 5 
+      unlockedAt: 140 
     },
     { 
       name: "Hareng", 
       img: "images/lacon.png", 
       intro: "Poisson long et mince, vivant en Atlantique Nord et Méditerranée.", 
-      unlockedAt: 5 
+      unlockedAt: 360
     },
     { 
       name: "Loquette", 
       img: "images/loquette.png", 
       intro: "Petit poisson long et argenté, vivant dans les eaux côtières et les estuaires.", 
-      unlockedAt: 5 
+      unlockedAt: 370 
     },
     { 
       name: "Maquereau espagnol", 
       img: "images/maquereau_espagnol.png", 
       intro: "Poisson bleu-vert, connu pour sa chair savoureuse.", 
-      unlockedAt: 5 
+      unlockedAt: 120 
     },
     { 
       name: "Merlu", 
       img: "images/merlu.png", 
       intro: "Poisson blanc, vivant en Atlantique et Méditerranée,", 
-      unlockedAt: 5 
+      unlockedAt: 300 
     },
     { 
       name: "Poisson-ballon à piquants", 
       img: "images/poisson_ballon.png", 
       intro: "Poisson qui se gonfle pour se protéger et qui a des piquants.", 
-      unlockedAt: 5 
+      unlockedAt: 400 
     },
     { 
       name: "Oarfish", 
       img: "images/oarfish.png", 
       intro: "Poisson long et mince, vivant dans les grandes profondeurs.", 
-      unlockedAt: 5 
+      unlockedAt: 850 
     },
     { 
       name: "Poisson-lune rouge", 
       img: "images/poisson_lune_rouge.png", 
       intro: "Poisson rond, proche du poisson-lune classique mais avec des nuances rouges.", 
-      unlockedAt: 5 
+      unlockedAt: 800
     },
     { 
       name: "Sériole japonaise", 
       img: "images/seriole_japonaise.png", 
       intro: "Gros poisson pélagique vivant en mer ouverte,", 
-      unlockedAt: 5 
+      unlockedAt: 900
     },
 
     ];
@@ -502,42 +519,6 @@
 
             createFloatingSpecies();
         }
-    }
-    function getNonOverlappingPosition(existing, size = 150, maxTries = 50) {
-
-        const container = document.getElementById("achievements");
-
-        for (let i = 0; i < maxTries; i++) {
-
-            const x = Math.random() * (container.clientWidth - size);
-            const y = Math.random() * (container.clientHeight - size);
-
-            let overlap = false;
-
-            for (const pos of existing) {
-
-                const rect = pos.getBoundingClientRect();
-
-                if (
-                    x < rect.right &&
-                    x + size > rect.left &&
-                    y < rect.bottom &&
-                    y + size > rect.top
-                ) {
-                    overlap = true;
-                    break;
-                }
-            }
-
-            if (!overlap) {
-                return { x, y };
-            }
-        }
-
-        return {
-            x: Math.random() * (container.clientWidth - size),
-            y: Math.random() * (container.clientHeight - size)
-        };
     }
 
     function createFloatingSpecies() {
@@ -575,15 +556,21 @@
             // Add first so it exists in DOM
         container.appendChild(div);
 
-        const existing = container.querySelectorAll(".species");
-        const position = getNonOverlappingPosition(existing);
+        const containerWidth =
+            container.clientWidth || window.innerWidth;
 
-        div.dataset.x = position.x;
-        div.dataset.y = position.y;
+        const containerHeight =
+            container.clientHeight || window.innerHeight;
+
+        const x = Math.random() * (containerWidth - 150);
+        const y = Math.random() * (containerHeight - 150);
+
+        div.dataset.x = x;
+        div.dataset.y = y;
 
         // Apply position
         div.style.transform =
-            `translate(${position.x}px, ${position.y}px)`;
+            `translate(${x}px, ${y}px)`;
 
         swim(div);
 
@@ -638,39 +625,49 @@
 
     // Fonction pour changer de contenu
     function switchTab(tabId) {
-            contents.forEach(c => c.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
 
-            document.getElementById(tabId).classList.add("active");
+        const selected = document.getElementById(tabId);
+        selected.classList.add("active");
 
-            const gameFrame = document.querySelector("#game iframe");
+        const gameFrame = document.querySelector("#game iframe");
 
-            if (tabId === "game") {
-                gameFrame.style.pointerEvents = "auto";
-            } else {
-                gameFrame.style.pointerEvents = "none";
-            }
+        if (tabId === "game") {
+            gameFrame.style.pointerEvents = "auto";
+        } else {
+            gameFrame.style.pointerEvents = "none";
         }
+
+        if (tabId === "achievements") {
+
+            // Wait one frame so layout updates
+            requestAnimationFrame(() => {
+                createFloatingSpecies();
+            });
+
+        }
+    }
 
     // Flèches et sidebars
     const arrowLeft = document.querySelector('.arrow.left');
     const arrowRight = document.querySelector('.arrow.right');
     const sidebarLeft = document.getElementById('sidebarLeft');
-    const sidebarRight = document.getElementById('sidebarRight');
+    // const sidebarRight = document.getElementById('sidebarRight');
 
     document.addEventListener('mousemove', e => {
         if (!sidebarLeft.classList.contains('open')) {
             arrowLeft.style.opacity = (e.clientX < 30) ? 1 : 0;
         }
-        if (!sidebarRight.classList.contains('open')) {
-            arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
-        }
+        // if (!sidebarRight.classList.contains('open')) {
+        //     arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
+        // }
     });
 
     arrowLeft.addEventListener('click', () => {
         sidebarLeft.classList.toggle('open');
         if (sidebarLeft.classList.contains('open')) {
             arrowLeft.innerHTML = '&#9664;';
-            arrowLeft.style.left = "250px";
+            arrowLeft.style.left = "349px";
             arrowLeft.style.opacity = 1;
         } else {
             arrowLeft.innerHTML = '&#9654;';
@@ -679,18 +676,18 @@
         }
     });
 
-    arrowRight.addEventListener('click', () => {
-        sidebarRight.classList.toggle('open');
-        if (sidebarRight.classList.contains('open')) {
-            arrowRight.innerHTML = '&#9654;';
-            arrowRight.style.right = "250px";
-            arrowRight.style.opacity = 1;
-        } else {
-            arrowRight.innerHTML = '&#9664;';
-            arrowRight.style.right = "0";
-            arrowRight.style.opacity = 0;
-        }
-    });
+    // arrowRight.addEventListener('click', () => {
+    //     sidebarRight.classList.toggle('open');
+    //     if (sidebarRight.classList.contains('open')) {
+    //         arrowRight.innerHTML = '&#9654;';
+    //         arrowRight.style.right = "250px";
+    //         arrowRight.style.opacity = 1;
+    //     } else {
+    //         arrowRight.innerHTML = '&#9664;';
+    //         arrowRight.style.right = "0";
+    //         arrowRight.style.opacity = 0;
+    //     }
+    // });
 
     // Fonctions boutons
     function goSettings() { alert("Ouvrir les paramètres !"); }
