@@ -343,7 +343,6 @@
 
     <!-- Notification bar -->
     <div id="new-species-notice" class="notice hidden">
-        A new species has been added to your repertoire!
     </div>
 
 
@@ -563,6 +562,8 @@
                 return; // already on screen
             }
 
+            addedSomething = species.name
+
             // Create new species
             const div = document.createElement("div");
             div.classList.add("species");
@@ -596,7 +597,7 @@
             swim(div); // start animation ONLY for this new species
         });
         if (addedSomething) {
-            showNewSpeciesNotice();
+            showNewSpeciesNotice(addedSomething);
         }
     }
 
@@ -660,7 +661,7 @@
 
     function showNewSpeciesNotice() {
         const bar = document.getElementById("new-species-notice");
-
+        bar.textContent = `${speciesName} ajoute dans ta repertoire!`;
         bar.classList.remove("hidden");
         bar.classList.add("show");
 
