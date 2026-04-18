@@ -520,13 +520,55 @@
         if (score !== previousScore) {
             previousScore = score;
 
-            // stop animations properly
-            animations.forEach(id => cancelAnimationFrame(id));
-            animations = [];
-
-            createFloatingSpecies();
+           addNewSpecies();
         }
     }
+    function addNewSpecies() {
+        const container = document.getElementById("achievements");
+
+        speciesData.forEach(species => {
+            const unlocked = score >= species.unlockedAt;
+            if (!unlocked) return;
+
+            // Check if species already exists
+            if (container.querySelector(`[data-species="${species.name}"]`)) {
+                return; // already on screen
+            }
+
+            // Create new species
+            const div = document.createElement("div");
+            div.classList.add("species");
+            div.dataset.species = species.name;
+
+            const img = document.createElement("img");
+            img.src = species.img;
+            img.alt = species.name;
+            div.appendChild(img);
+
+            const tooltip = document.createElement("div");
+            tooltip.classList.add("tooltip");
+            div.appendChild(tooltip);
+
+            div.addEventListener("click", () => openPopup(species));
+
+            container.appendChild(div);
+
+            // Random position
+            const containerWidth = container.clientWidth || window.innerWidth;
+            const containerHeight = container.clientHeight || window.innerHeight;
+
+            const x = Math.random() * (containerWidth - 150);
+            const y = Math.random() * (containerHeight - 150);
+
+            div.dataset.x = x;
+            div.dataset.y = y;
+
+            div.style.transform = `translate(${x}px, ${y}px)`;
+
+            swim(div); // start animation ONLY for this new species
+        });
+    }
+
 
     function createFloatingSpecies() {
 
