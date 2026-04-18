@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
 [ext_resource type="StyleBox" uid="uid://c7wfhuh402aqx" path="res://assets/Styles/HUD_style.tres" id="2_rve7n"]
 [ext_resource type="Texture2D" uid="uid://e08age7cjjnp" path="res://icon.svg" id="3_bm2gq"]
+[ext_resource type="Theme" uid="uid://k13xbtrbb3a5" path="res://assets/Styles/font.tres" id="3_rve7n"]
 [ext_resource type="AnimationLibrary" uid="uid://dqiviwmao54ul" path="res://assets/Animations/.res" id="4_meimr"]
 [ext_resource type="Texture2D" uid="uid://cpm5b577y0d6u" path="res://assets/dividers-png-rdcarstn8g3zb1qm-421228855.jpg" id="7_cf6ij"]
 [ext_resource type="Script" uid="uid://ktya60q3px01" path="res://scripts/building.gd" id="7_k4w17"]
@@ -38,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_rve7n")
 text = "Fun facts"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -123,6 +125,7 @@ stretch_mode = 6
 [node name="BuildLabel1" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building1" unique_id=1183036274]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("3_rve7n")
 text = "Build Name
 "
 horizontal_alignment = 1
@@ -153,6 +156,7 @@ stretch_mode = 6
 [node name="BuildLabel2" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building2" unique_id=1486873310]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("3_rve7n")
 text = "Build Name
 "
 horizontal_alignment = 1
@@ -183,6 +187,7 @@ stretch_mode = 6
 [node name="BuildLabel3" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building3" unique_id=1891153639]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("3_rve7n")
 text = "Build Name
 
 "
@@ -214,6 +219,7 @@ stretch_mode = 6
 [node name="BuildLabel4" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building4" unique_id=1516906125]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("3_rve7n")
 text = "Build Name
 "
 horizontal_alignment = 1
@@ -244,6 +250,7 @@ stretch_mode = 6
 [node name="BuildLabel5" type="Label" parent="RightMargin/RightPanel/ScrollUpgrade/BoxUpgrade/Building5" unique_id=1419414928]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("3_rve7n")
 text = "Build Name
 "
 horizontal_alignment = 1
@@ -251,12 +258,13 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="NewsLabel" type="Label" parent="RightMargin/RightPanel" unique_id=933292186]
+[node name="UpgradeLabel" type="Label" parent="RightMargin/RightPanel" unique_id=933292186]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.125
 grow_horizontal = 2
+theme = ExtResource("3_rve7n")
 text = "Upgrades"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -269,6 +277,7 @@ anchor_top = 0.08888889
 anchor_right = 0.9791667
 anchor_bottom = 0.125
 grow_horizontal = 2
+theme = ExtResource("3_rve7n")
 text = "Output Label
 "
 label_settings = SubResource("LabelSettings_ljw04")
@@ -312,6 +321,7 @@ offset_top = -0.3600006
 offset_right = -0.8000488
 offset_bottom = -0.3199997
 pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("3_rve7n")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Score"
 fit_content = true
