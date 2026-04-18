@@ -21,5 +21,5 @@ func randomIdPlay() -> void:
 
 func _on_background_music_finished() -> void:
 	randomIdPlay()
-	if hud.trash_score >= 10:
+	if hud.trash_score >= 10**15:
 		end.show()
