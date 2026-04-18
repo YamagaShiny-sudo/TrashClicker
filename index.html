@@ -777,7 +777,24 @@
     });
 
 
+    function resizeGame() {
+        const baseWidth = 1920;
+        const baseHeight = 1080;
 
+        const scale = Math.min(
+            window.innerWidth / baseWidth,
+            window.innerHeight / baseHeight
+        );
+
+        const iframe = document.querySelector("#game iframe");
+
+        iframe.style.transform = `
+            translate(-50%, -50%) scale(${scale})
+        `;
+    }
+
+    window.addEventListener("resize", resizeGame);
+    resizeGame();
 
 </script>
 </body>
