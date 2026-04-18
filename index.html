@@ -241,6 +241,28 @@
             background-repeat: no-repeat;
         }
 
+        .notice {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .notice.show {
+            opacity: 1;
+        }
+
+        .notice.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -318,6 +340,12 @@
             ">
         </iframe>
     </div>
+
+    <!-- Notification bar -->
+    <div id="new-species-notice" class="notice hidden">
+        A new species has been added to your repertoire!
+    </div>
+
 
 <script>
     // Données espèces
@@ -567,6 +595,9 @@
 
             swim(div); // start animation ONLY for this new species
         });
+        if (addedSomething) {
+            showNewSpeciesNotice();
+        }
     }
 
 
@@ -626,6 +657,20 @@
 
         });
     }
+
+    function showNewSpeciesNotice() {
+        const bar = document.getElementById("new-species-notice");
+
+        bar.classList.remove("hidden");
+        bar.classList.add("show");
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+            bar.classList.remove("show");
+            setTimeout(() => bar.classList.add("hidden"), 400);
+        }, 3000);
+    }
+
 
     function swim(element) {
 
