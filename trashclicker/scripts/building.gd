@@ -31,8 +31,9 @@ func _on_build_upgrade_button_pressed() -> void:
 		total_cost = build_cost * mult_cost ** (level)
 		build_label.text = build_name + " | Lvl: " + str(level) + "\n\nPrix: " + format_build(total_cost) + "\n\nPoubelles/s: " + format_build(total_output)
 		#Upgrade the manual output when unlock a new building
-		if level == 1 and hud.output < passif_upgrade:
+		if hud.output < passif_upgrade:
 			hud.output = passif_upgrade
+		passif_upgrade += build_output
 
 #Building adding score
 func _on_build_timer_timeout() -> void:

@@ -2,6 +2,7 @@ extends Node
 
 @onready var score_label: RichTextLabel = $ScoreLabel
 @onready var power_label: Label = $RightMargin/RightPanel/ManuelOutputLabel
+@onready var goal_label: Label = $RightMargin/RightPanel/GoalLabel
 
 var trash_score : float = 0
 
@@ -16,10 +17,16 @@ func _ready() -> void:
 func update_text() -> void:
 	score_label.text = "Poubelles collectées: " + format(trash_score)
 	power_label.text = "Poubelles/click: " + format(output)
+	goal_label.text = format(trash_score) + "/10.00Quad"
 
 var output = 1
-@onready var click_sound: AudioStreamPlayer = $Trash/ClickSound
+@onready var click_timer: Timer = $Trash/ClickTimer
 func _main_button_pressed() -> void:
+	if click_timer.time_left <= 0:
+		click_timer.start()
+
+@onready var click_sound: AudioStreamPlayer = $Trash/ClickSound
+func _on_click_timer_timeout() -> void:
 	addScore(output)
 	click_sound.play()
 
