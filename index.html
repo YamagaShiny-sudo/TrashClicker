@@ -38,6 +38,8 @@
             cursor: pointer;
             transition: opacity 0.3s;
             z-index: 1000;
+
+            opacity: 1;
         }
         .arrow.left { left: 0; }
         .arrow.right { right: 0; }
@@ -317,7 +319,6 @@
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%);
                 transform-origin: center center;
             ">
         </iframe>
@@ -446,12 +447,7 @@
         intro: "Filet de pêche oublié qui peut piéger les poissons et tortues.", 
         unlockedAt: 1015 
     },
-    { 
-        name: "Déchet métallique", 
-        img: "images/trash_metal.png", 
-        intro: "Objets en métal jetés dans la mer, qui peuvent rouiller et blesser les animaux.", 
-        unlockedAt: 5 
-    },
+   
     { 
     name: "Liquide dangereux", 
     img: "images/hazardous_liquid.png", 
@@ -552,15 +548,17 @@
     }
     function addNewSpecies() {
         const container = document.getElementById("achievements");
-
+        let addedSomething = null;
         speciesData.forEach(species => {
             const unlocked = score >= species.unlockedAt;
             if (!unlocked) return;
 
             // Check if species already exists
-            if (container.querySelector(`[data-species="${species.name}"]`)) {
-                return; // already on screen
-            }
+            const id = species.name.replace(/\s+/g, "_");
+
+            if (container.querySelector(
+                `[data-species="${id}"]`
+            )) return;
 
             addedSomething = species.name
 
@@ -612,7 +610,7 @@
         speciesData.forEach(species => {
             const div = document.createElement("div");
             div.classList.add("species");
-            div.dataset.species = species.name;
+            div.dataset.species = species.name.replace(/\s+/g, "_");
 
             const unlocked = score >= species.unlockedAt;
             if (!unlocked) {
@@ -659,7 +657,7 @@
         });
     }
 
-    function showNewSpeciesNotice() {
+    function showNewSpeciesNotice(speciesName) {
         const bar = document.getElementById("new-species-notice");
         bar.textContent = `${speciesName} ajoute dans ta repertoire!`;
         bar.classList.remove("hidden");
@@ -680,9 +678,7 @@
 
         let speed = 0.6 + Math.random() * 0.6;
         let direction = -1;
-
         let animationId;
-
         function move() {
 
             let x = parseFloat(element.dataset.x);
@@ -707,10 +703,8 @@
 
             animationId = requestAnimationFrame(move);
         }
-
         animationId = requestAnimationFrame(move);
 
-        animations.push(animationId);
     }
     createFloatingSpecies();
 
@@ -738,7 +732,6 @@
 
             // Wait one frame so layout updates
             requestAnimationFrame(() => {
-                createFloatingSpecies();
             });
 
         }
@@ -746,18 +739,18 @@
 
     // Flèches et sidebars
     const arrowLeft = document.querySelector('.arrow.left');
-    const arrowRight = document.querySelector('.arrow.right');
+    // const arrowRight = document.querySelector('.arrow.right');
     const sidebarLeft = document.getElementById('sidebarLeft');
     // const sidebarRight = document.getElementById('sidebarRight');
 
-    document.addEventListener('mousemove', e => {
-        if (!sidebarLeft.classList.contains('open')) {
-            arrowLeft.style.opacity = (e.clientX < 30) ? 1 : 0;
-        }
-        // if (!sidebarRight.classList.contains('open')) {
-        //     arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
-        // }
-    });
+    // document.addEventListener('mousemove', e => {
+    //     if (!sidebarLeft.classList.contains('open')) {
+    //         arrowLeft.style.opacity = (e.clientX < 30) ? 1 : 0;
+    //     }
+    //     // if (!sidebarRight.classList.contains('open')) {
+    //     //     arrowRight.style.opacity = (window.innerWidth - e.clientX < 30) ? 1 : 0;
+    //     // }
+    // });
 
     arrowLeft.addEventListener('click', () => {
         sidebarLeft.classList.toggle('open');
@@ -768,7 +761,7 @@
         } else {
             arrowLeft.innerHTML = '&#9654;';
             arrowLeft.style.left = "0";
-            arrowLeft.style.opacity = 0;
+
         }
     });
 
