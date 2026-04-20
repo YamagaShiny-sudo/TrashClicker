@@ -19,35 +19,17 @@
 [ext_resource type="AudioStream" uid="uid://ctpoofn6c26mn" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/17  8pm _ Towball's Crossing.mp3" id="11_bhx41"]
 [ext_resource type="AudioStream" uid="uid://cgknroghlago3" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/03 Spring is in the Air!.mp3" id="12_qnb83"]
 [ext_resource type="AudioStream" uid="uid://rexextvk7m5a" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/02 Enjoying the Sunrise.mp3" id="13_sww3w"]
+[ext_resource type="AudioStream" uid="uid://mrr5whposxyk" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/01 Welcome To Towballs Crossing Deluxe!.mp3" id="14_1kice"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lbhrr"]
 b = Vector2(0, 810)
 
 [node name="Main" type="Node" unique_id=448722216]
 script = ExtResource("1_yqjtg")
-soundList = Array[AudioStreamMP3]([ExtResource("2_0tnpc"), ExtResource("3_0tnpc"), ExtResource("4_264po"), ExtResource("5_1kice"), ExtResource("6_5newe"), ExtResource("7_37s47"), ExtResource("8_bt5mj"), ExtResource("9_e1j6l"), ExtResource("10_pl11u"), ExtResource("11_bhx41"), ExtResource("12_qnb83"), ExtResource("13_sww3w")])
+soundList = Array[AudioStreamMP3]([ExtResource("2_0tnpc"), ExtResource("3_0tnpc"), ExtResource("4_264po"), ExtResource("5_1kice"), ExtResource("6_5newe"), ExtResource("7_37s47"), ExtResource("8_bt5mj"), ExtResource("9_e1j6l"), ExtResource("10_pl11u"), ExtResource("11_bhx41"), ExtResource("12_qnb83"), ExtResource("13_sww3w"), ExtResource("14_1kice")])
 
 [node name="Background" parent="." unique_id=1772365361 instance=ExtResource("5_p57ef")]
 process_priority = -1
-
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=807068674]
-stream = ExtResource("3_lnu2h")
-autoplay = true
-
-[node name="SoundMute" type="TextureButton" parent="BackgroundMusic" unique_id=1655456739]
-anchors_preset = -1
-anchor_top = 0.9305556
-anchor_right = 0.0390625
-anchor_bottom = 1.0
-offset_right = 425.0
-offset_bottom = 425.0
-grow_vertical = 0
-scale = Vector2(0.15, 0.15)
-toggle_mode = true
-button_pressed = true
-texture_normal = ExtResource("4_u5sy4")
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Spawner" type="Node" parent="." unique_id=1671951059]
 script = ExtResource("5_iywne")
@@ -73,6 +55,31 @@ wait_time = 60.0
 [node name="End" parent="." unique_id=1671572892 instance=ExtResource("6_p57ef")]
 visible = false
 
-[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
-[connection signal="pressed" from="BackgroundMusic/SoundMute" to="." method="_on_sound_mute_pressed"]
+[node name="CheckTimer" type="Timer" parent="End" unique_id=891381607]
+wait_time = 10.0
+autostart = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=807068674]
+process_mode = 3
+stream = ExtResource("3_lnu2h")
+autoplay = true
+
+[node name="SoundMute" type="TextureButton" parent="BackgroundMusic" unique_id=1655456739]
+z_index = 5
+anchors_preset = -1
+anchor_top = 0.9305556
+anchor_right = 0.0390625
+anchor_bottom = 1.0
+offset_right = 425.0
+offset_bottom = 425.0
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+toggle_mode = true
+texture_normal = ExtResource("4_u5sy4")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
 [connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="End/CheckTimer" to="." method="_on_check_timer_timeout"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
+[connection signal="toggled" from="BackgroundMusic/SoundMute" to="." method="_on_sound_mute_toggled"]

@@ -27,16 +27,18 @@ func randomIdPlay() -> void:
 
 func _on_background_music_finished() -> void:
 	randomIdPlay()
-	if hud.trash_score >= 10**16:
+
+func _on_check_timer_timeout() -> void:
+	if hud.trash_score >= 10**15:
 		end.show()
 		get_tree().paused = true
 
 @onready var sound_mute: TextureButton = $BackgroundMusic/SoundMute
-func _on_sound_mute_pressed() -> void:
-	if not sound_mute.button_pressed:
+func _on_sound_mute_toggled(toggled_on: bool) -> void:
+	if toggled_on:
 		sound_mute.texture_normal = load(soundIcon[0])
 		AudioServer.set_bus_mute(0, true)
 
-	if sound_mute.button_pressed:
+	if not toggled_on:
 		sound_mute.texture_normal = load(soundIcon[1])
 		AudioServer.set_bus_mute(0, 0)

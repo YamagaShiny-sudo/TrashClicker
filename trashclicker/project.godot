@@ -30,10 +30,6 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[gui]
-
-theme/custom_font="uid://yg7i0hekbm5l"
-
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
