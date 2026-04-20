@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drbs7myjgoou" path="res://scripts/main.gd" id="1_7dvtb"]
 [ext_resource type="Script" uid="uid://clgvcwrykc7hg" path="res://scripts/funfact_show.gd" id="2_8cuoo"]
+[ext_resource type="AudioStream" uid="uid://dp1rbwha1sawo" path="res://assets/bubblePop.mp3" id="2_467v5"]
 [ext_resource type="Script" uid="uid://djhg48sqhbaea" path="res://scripts/right_panel_anim.gd" id="2_jvmy4"]
 [ext_resource type="StyleBox" uid="uid://c7wfhuh402aqx" path="res://assets/Styles/HUD_style.tres" id="2_rve7n"]
 [ext_resource type="Theme" uid="uid://k13xbtrbb3a5" path="res://assets/Styles/font.tres" id="3_rve7n"]
@@ -12,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bg4w0y1oinj7j" path="res://assets/ButtonStyle/click.png" id="9_467v5"]
 [ext_resource type="Texture2D" uid="uid://chsayojk0kcp2" path="res://assets/poubelle_modele_3.png" id="9_cf6ij"]
 [ext_resource type="Texture2D" uid="uid://b0swbmn88scph" path="res://assets/ButtonStyle/hover.png" id="10_natmc"]
-[ext_resource type="AudioStream" uid="uid://cwc2bdllymrth" path="res://assets/trash_collect.wav" id="13_ljw04"]
+[ext_resource type="AudioStream" uid="uid://cwc2bdllymrth" path="res://assets/trashClickSound2.wav" id="13_ljw04"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ljw04"]
 line_spacing = -16.0
@@ -21,6 +22,10 @@ line_spacing = -16.0
 
 [node name="HUD" type="Node" unique_id=1416034342]
 script = ExtResource("1_7dvtb")
+
+[node name="FishClickSound" type="AudioStreamPlayer" parent="." unique_id=2057093797]
+stream = ExtResource("2_467v5")
+bus = &"SoundEffect"
 
 [node name="InfoPanel" type="Panel" parent="." unique_id=546046672]
 anchors_preset = -1

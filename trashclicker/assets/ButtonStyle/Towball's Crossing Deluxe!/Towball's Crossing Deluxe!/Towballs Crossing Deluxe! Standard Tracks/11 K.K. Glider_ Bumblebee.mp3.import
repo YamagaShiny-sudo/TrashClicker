@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwip0xld0mrf"
+path="res://.godot/imported/11 K.K. Glider_ Bumblebee.mp3-be70e93b3bf5916336e2aa1c309b1eae.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/11 K.K. Glider_ Bumblebee.mp3"
+dest_files=["res://.godot/imported/11 K.K. Glider_ Bumblebee.mp3-be70e93b3bf5916336e2aa1c309b1eae.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

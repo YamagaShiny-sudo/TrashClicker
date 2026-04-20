@@ -1,0 +1,18 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c401g8ok7wbbi"
+valid=false
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/__MACOSX/Towball's Crossing Deluxe!/Towball's Crossing/._15 6pm _ Towball's Crossing 1.mp3"
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

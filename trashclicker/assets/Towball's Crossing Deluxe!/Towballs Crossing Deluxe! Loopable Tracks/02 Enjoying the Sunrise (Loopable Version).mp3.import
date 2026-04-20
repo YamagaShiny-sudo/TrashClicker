@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ckwum6mykxks3"
+path="res://.godot/imported/02 Enjoying the Sunrise (Loopable Version).mp3-b6b98fe119902c8a0e06558830451d0f.mp3str"
+
+[deps]
+
+source_file="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Loopable Tracks/02 Enjoying the Sunrise (Loopable Version).mp3"
+dest_files=["res://.godot/imported/02 Enjoying the Sunrise (Loopable Version).mp3-b6b98fe119902c8a0e06558830451d0f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

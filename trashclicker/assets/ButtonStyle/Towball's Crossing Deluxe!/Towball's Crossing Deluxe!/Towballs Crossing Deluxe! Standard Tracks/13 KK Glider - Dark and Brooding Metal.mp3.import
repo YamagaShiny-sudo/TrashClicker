@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://duxublpngxcra"
+path="res://.godot/imported/13 KK Glider - Dark and Brooding Metal.mp3-1898a44de27a9c56f3889d1442747ad8.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/13 KK Glider - Dark and Brooding Metal.mp3"
+dest_files=["res://.godot/imported/13 KK Glider - Dark and Brooding Metal.mp3-1898a44de27a9c56f3889d1442747ad8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

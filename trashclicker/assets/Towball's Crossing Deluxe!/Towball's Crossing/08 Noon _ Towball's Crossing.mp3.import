@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpp17ehpp6xma"
+path="res://.godot/imported/08 Noon _ Towball's Crossing.mp3-2507d7cea1799b3b85da08e8e3430292.mp3str"
+
+[deps]
+
+source_file="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/08 Noon _ Towball's Crossing.mp3"
+dest_files=["res://.godot/imported/08 Noon _ Towball's Crossing.mp3-2507d7cea1799b3b85da08e8e3430292.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

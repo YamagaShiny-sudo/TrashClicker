@@ -26,8 +26,10 @@ func _main_button_pressed() -> void:
 		click_timer.start()
 
 @onready var click_sound: AudioStreamPlayer = $Trash/ClickSound
+@onready var sound_effect = [preload("res://assets/trashClickSound1.wav"), preload("res://assets/trashClickSound2.wav")]
 func _on_click_timer_timeout() -> void:
 	addScore(output)
+	click_sound.stream = sound_effect[randi_range(0, len(sound_effect)-1)]
 	click_sound.play()
 
 
@@ -59,17 +61,25 @@ func format(number : float) -> String:
 @onready var auto_stop: Timer = %AutoStop
 @onready var auto_clicker_timer: Timer = %AutoClickerTimer
 func auto_clicker() -> void:
+	play_sound_fish()
 	auto_clicker_timer.start()
 	auto_stop.start()
 #Press the main button
 func _on_auto_clicker_timer_timeout() -> void:
+	play_sound_fish()
 	addScore(output)
 #Stop the AutoClicker
 func _on_auto_stop_timeout() -> void:
+	play_sound_fish()
 	auto_clicker_timer.stop()
 	auto_stop.stop()
 
-
+@onready var fish_click_sound: AudioStreamPlayer = $FishClickSound
+var isFishClick = false
+func play_sound_fish() -> void:
+	if isFishClick:
+		fish_click_sound.play()
+		isFishClick = false
 
 #Speed Building PowerUP
 @onready var speed_building_stop: Timer = %SpeedBuildingStop

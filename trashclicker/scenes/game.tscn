@@ -2,16 +2,30 @@
 
 [ext_resource type="PackedScene" uid="uid://dcs5cx6tebe2f" path="res://scenes/HUD.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://n3a2jwky5gta" path="res://scripts/game_controller.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://djffn70rxjgye" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/01 Main Theme _ Towballs Crossing.mp3" id="2_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://oi1w4erejumh" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/04 Island Life.mp3" id="3_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://d1dvbglqyjxuj" path="res://assets/Minimalistic Loops/loop.wav" id="3_lnu2h"]
+[ext_resource type="AudioStream" uid="uid://m4hg5uqkt2hk" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/05 At the Farmers market.mp3" id="4_264po"]
+[ext_resource type="Texture2D" uid="uid://dpqcm1cvlgb8e" path="res://assets/soundOn.png" id="4_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://lnlhvsbbldsw" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/26 5am - Goodbye _ Towball's Crossing.mp3" id="5_1kice"]
 [ext_resource type="Script" uid="uid://cmq7casl0sam2" path="res://scripts/fish_spawner.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://djunbtyifxxdt" path="res://scenes/background.tscn" id="5_p57ef"]
+[ext_resource type="AudioStream" uid="uid://3qadeydiibw6" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/03 7am _ Towballs Crossing.mp3" id="6_5newe"]
 [ext_resource type="PackedScene" uid="uid://bcpyplf23jh5n" path="res://scenes/endScreen.tscn" id="6_p57ef"]
+[ext_resource type="AudioStream" uid="uid://d0fhb64y75diy" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/05 9am _ Towballs Crossing.mp3" id="7_37s47"]
+[ext_resource type="AudioStream" uid="uid://dfdddcgfmncxm" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/11 3pm _ Towballs Crossing.mp3" id="8_bt5mj"]
+[ext_resource type="AudioStream" uid="uid://cbldf1nq8rgbp" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/12 4pm _ Towball's Crossing.mp3" id="9_e1j6l"]
+[ext_resource type="AudioStream" uid="uid://b2sgys504uduc" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/15 6pm _ Towball's Crossing 1.mp3" id="10_pl11u"]
+[ext_resource type="AudioStream" uid="uid://ctpoofn6c26mn" path="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/17  8pm _ Towball's Crossing.mp3" id="11_bhx41"]
+[ext_resource type="AudioStream" uid="uid://cgknroghlago3" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/03 Spring is in the Air!.mp3" id="12_qnb83"]
+[ext_resource type="AudioStream" uid="uid://rexextvk7m5a" path="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/02 Enjoying the Sunrise.mp3" id="13_sww3w"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lbhrr"]
 b = Vector2(0, 810)
 
 [node name="Main" type="Node" unique_id=448722216]
 script = ExtResource("1_yqjtg")
+soundList = Array[AudioStreamMP3]([ExtResource("2_0tnpc"), ExtResource("3_0tnpc"), ExtResource("4_264po"), ExtResource("5_1kice"), ExtResource("6_5newe"), ExtResource("7_37s47"), ExtResource("8_bt5mj"), ExtResource("9_e1j6l"), ExtResource("10_pl11u"), ExtResource("11_bhx41"), ExtResource("12_qnb83"), ExtResource("13_sww3w")])
 
 [node name="Background" parent="." unique_id=1772365361 instance=ExtResource("5_p57ef")]
 process_priority = -1
@@ -19,6 +33,21 @@ process_priority = -1
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=807068674]
 stream = ExtResource("3_lnu2h")
 autoplay = true
+
+[node name="SoundMute" type="TextureButton" parent="BackgroundMusic" unique_id=1655456739]
+anchors_preset = -1
+anchor_top = 0.9305556
+anchor_right = 0.0390625
+anchor_bottom = 1.0
+offset_right = 425.0
+offset_bottom = 425.0
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("4_u5sy4")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Spawner" type="Node" parent="." unique_id=1671951059]
 script = ExtResource("5_iywne")
@@ -42,6 +71,8 @@ wait_time = 60.0
 [node name="HUD" parent="." unique_id=1877270055 instance=ExtResource("1_uwrxv")]
 
 [node name="End" parent="." unique_id=1671572892 instance=ExtResource("6_p57ef")]
+visible = false
 
 [connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
+[connection signal="pressed" from="BackgroundMusic/SoundMute" to="." method="_on_sound_mute_pressed"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]

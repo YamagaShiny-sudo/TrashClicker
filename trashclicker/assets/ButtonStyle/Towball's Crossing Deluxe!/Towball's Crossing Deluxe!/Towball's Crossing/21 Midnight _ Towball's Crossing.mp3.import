@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bg1c03yfosfqc"
+path="res://.godot/imported/21 Midnight _ Towball's Crossing.mp3-26e1c7064762be5065a9cd399c1ddb75.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towball's Crossing/21 Midnight _ Towball's Crossing.mp3"
+dest_files=["res://.godot/imported/21 Midnight _ Towball's Crossing.mp3-26e1c7064762be5065a9cd399c1ddb75.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

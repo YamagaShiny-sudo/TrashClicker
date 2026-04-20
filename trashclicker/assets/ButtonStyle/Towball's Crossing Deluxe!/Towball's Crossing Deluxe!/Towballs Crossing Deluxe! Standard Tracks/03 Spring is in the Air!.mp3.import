@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dscvuxlg3ekh0"
+path="res://.godot/imported/03 Spring is in the Air!.mp3-aab6c290f83cb6a8e0f395892980a6d4.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/03 Spring is in the Air!.mp3"
+dest_files=["res://.godot/imported/03 Spring is in the Air!.mp3-aab6c290f83cb6a8e0f395892980a6d4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnvl2jdpqgft8"
+path="res://.godot/imported/05 At the Farmers market.mp3-937a56d24bf3d1b481d3d980e4733b65.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/05 At the Farmers market.mp3"
+dest_files=["res://.godot/imported/05 At the Farmers market.mp3-937a56d24bf3d1b481d3d980e4733b65.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

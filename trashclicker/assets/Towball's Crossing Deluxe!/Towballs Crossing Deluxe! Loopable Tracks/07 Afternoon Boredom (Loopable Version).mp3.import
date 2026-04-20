@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cp6euvdafp3kh"
+path="res://.godot/imported/07 Afternoon Boredom (Loopable Version).mp3-bd9bcb2c3754ed7d50272adaf9919264.mp3str"
+
+[deps]
+
+source_file="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Loopable Tracks/07 Afternoon Boredom (Loopable Version).mp3"
+dest_files=["res://.godot/imported/07 Afternoon Boredom (Loopable Version).mp3-bd9bcb2c3754ed7d50272adaf9919264.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

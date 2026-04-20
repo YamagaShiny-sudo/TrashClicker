@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7v8seoo3fp5p"
+path="res://.godot/imported/14 From Day to Night _ Towball's Crossing.mp3-fb3ca603c0a979a7fdcafed1bb20725a.mp3str"
+
+[deps]
+
+source_file="res://assets/Towball's Crossing Deluxe!/Towball's Crossing/14 From Day to Night _ Towball's Crossing.mp3"
+dest_files=["res://.godot/imported/14 From Day to Night _ Towball's Crossing.mp3-fb3ca603c0a979a7fdcafed1bb20725a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

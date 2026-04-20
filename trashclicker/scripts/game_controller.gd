@@ -1,26 +1,42 @@
 extends Node
 
-var soundList = ["res://assets/Minimalistic Loops/loop.wav", "res://assets/Minimalistic Loops/loopTwo.wav", "res://assets/Minimalistic Loops/loopThree.wav"]
-var idPlay = randi_range(0, 2)
-var pitch = randf_range(0.990, 1.010)
+@export var soundList : Array[AudioStreamMP3]
+var soundIcon = ["res://assets/soundOff.png", "res://assets/soundOn.png"]
+var idPlay = randi_range(0, len(soundList)-1)
 @onready var hud = get_node("HUD") 
+var actif : int
 
 @onready var end: Control = $End
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 func _ready() -> void:
-	background_music.stream = load("res://assets/Minimalistic Loops/buildup.wav")
-	background_music.play()
+	actif = idPlay
+	randomIdPlay()
 	end.hide()
 
 
 func randomIdPlay() -> void:
-	background_music.stream = load(soundList[idPlay])
-	background_music.pitch_scale = pitch
-	idPlay = randi() % 3
+	idPlay = randi_range(0, len(soundList)-1)
+	if actif == idPlay:
+		if len(soundList)-1 < actif + 1:
+			idPlay-=1
+		else:
+			idPlay+=1
+	background_music.stream = soundList[idPlay]
 	background_music.play()
+	actif = idPlay
 
 func _on_background_music_finished() -> void:
 	randomIdPlay()
 	if hud.trash_score >= 10**16:
 		end.show()
 		get_tree().paused = true
+
+@onready var sound_mute: TextureButton = $BackgroundMusic/SoundMute
+func _on_sound_mute_pressed() -> void:
+	if not sound_mute.button_pressed:
+		sound_mute.texture_normal = load(soundIcon[0])
+		AudioServer.set_bus_mute(0, true)
+
+	if sound_mute.button_pressed:
+		sound_mute.texture_normal = load(soundIcon[1])
+		AudioServer.set_bus_mute(0, 0)

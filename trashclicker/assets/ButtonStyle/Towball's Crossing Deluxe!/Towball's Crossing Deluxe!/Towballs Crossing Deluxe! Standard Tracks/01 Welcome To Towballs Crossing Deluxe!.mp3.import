@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hh5nprba1vow"
+path="res://.godot/imported/01 Welcome To Towballs Crossing Deluxe!.mp3-7f82abe360daa44bad6d83e52a449ad8.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/01 Welcome To Towballs Crossing Deluxe!.mp3"
+dest_files=["res://.godot/imported/01 Welcome To Towballs Crossing Deluxe!.mp3-7f82abe360daa44bad6d83e52a449ad8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

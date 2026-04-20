@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mtj0faq6wdki"
+path="res://.godot/imported/14 K.K. Glider - Toein' the Line.mp3-566d3b65ec9756127770df5296881b87.mp3str"
+
+[deps]
+
+source_file="res://assets/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Standard Tracks/14 K.K. Glider - Toein' the Line.mp3"
+dest_files=["res://.godot/imported/14 K.K. Glider - Toein' the Line.mp3-566d3b65ec9756127770df5296881b87.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

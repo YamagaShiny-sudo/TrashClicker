@@ -28,8 +28,7 @@ func _on_timer_timeout() -> void:
 	if actif == text_index:
 		if len(array_text)-1 < actif + 1:
 			text_index-=1
-			actif = text_index
 		else:
 			text_index+=1
-			actif = text_index
 	scroll_text(array_text[text_index])
+	actif = text_index

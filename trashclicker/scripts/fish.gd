@@ -12,14 +12,19 @@ func _ready() -> void:
 @onready var hud = get_node("../../HUD")
 func _on_fish_button_pressed() -> void:
 	if effect[randomChoice] == "DoubleSpeed":
+		hud.isFishClick = true
 		hud.speed_building_power()
 	elif effect[randomChoice] == "AutoClick":
+		hud.isFishClick = true
 		hud.auto_clicker()
 	elif effect[randomChoice] == "Multiple":
+		hud.isFishClick = true
 		hud.trash_score *= mult
 		print(mult)
 		hud.update_text()
 	queue_free()
+
+@onready var click_sound: AudioStreamPlayer = $Trash/ClickSound
 
 @onready var detect_button: Button = $DetectButton
 func random_fish():

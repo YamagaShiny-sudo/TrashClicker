@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://767e13aajiam"
+path="res://.godot/imported/04 Island Life (Loopable Version).mp3-de5d825f5f26be5b50068603f0587afb.mp3str"
+
+[deps]
+
+source_file="res://assets/ButtonStyle/Towball's Crossing Deluxe!/Towball's Crossing Deluxe!/Towballs Crossing Deluxe! Loopable Tracks/04 Island Life (Loopable Version).mp3"
+dest_files=["res://.godot/imported/04 Island Life (Loopable Version).mp3-de5d825f5f26be5b50068603f0587afb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
