@@ -216,7 +216,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("7_k4w17")
 passif_upgrade = 1500000000
-build_cost = 2500000000
+build_cost = 2000000000
 build_output = 500000000
 build_label = NodePath("BuildLabel4")
 build_name = "Robot"
@@ -345,7 +345,7 @@ stream = ExtResource("13_ljw04")
 bus = &"SoundEffect"
 
 [node name="ClickTimer" type="Timer" parent="Trash" unique_id=800321713]
-wait_time = 0.05
+wait_time = 0.075
 one_shot = true
 
 [node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1820173823]

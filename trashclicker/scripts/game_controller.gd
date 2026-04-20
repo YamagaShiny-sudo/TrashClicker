@@ -29,7 +29,7 @@ func _on_background_music_finished() -> void:
 	randomIdPlay()
 
 func _on_check_timer_timeout() -> void:
-	if hud.trash_score >= 10**15:
+	if hud.trash_score >= 10**16:
 		end.show()
 		get_tree().paused = true
 
