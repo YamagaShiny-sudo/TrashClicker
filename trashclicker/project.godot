@@ -8,16 +8,12 @@
 
 config_version=5
 
-[animation]
-
-compatibility/default_parent_skeleton_in_mesh_instance_3d=true
-
 [application]
 
 config/name="TrashClicker"
 run/main_scene="uid://j7w56q11xi33"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bdnvfnljyic1a"
 
 [audio]
 
